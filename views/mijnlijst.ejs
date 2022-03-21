@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('includes/head'); -%>
+
+<body id="mijnlijst">
+    <%- include('includes/header'); -%>
+    <h1><%= title %></h1>
+    <main>
+
+        <% allelanden.forEach(function(landen){ %>
+
+        <section>
+
+            <h2>Land: <%= landen.land %></h2>
+            <h3>Populatie: <%= landen.populatie %></h3>
+            <h3>Regio: <%= landen.regio %></h3>
+            <h3>Hoofdstad: <%= landen.capital %></h3>
+            <h3>Taal: <%= landen.language %></h3>
+
+            <form action="/delete/<%= landen._id %>" method="POST">
+                <button type="submit">Verwijder</button>
+            </form>
+        </section>
+        <% }) %>
+
+    </main>
+
+</body>
+<script src="/scripts/script.js"></script>
+
+</html>
