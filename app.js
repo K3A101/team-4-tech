@@ -15,6 +15,51 @@ const {
     ObjectId
 } = require('mongodb');
 
+// Nodemailer 
+
+const nodemailer = require('nodemailer');
+
+app.post('/send', (req, res) => {
+    const output = `
+    <h3>Yeah! je hebt een account gemaakt</h3>
+    <h4>Je gegevens</h4>
+    <ul>
+    <li>Gebruikersnaam: ${req.body.username}</li>
+    <li>Email: ${req.body.email}</li>
+    <li>Wachtwoord: ${req.body.password}</li>
+    </ul>`;
+
+//  Nodemailer info
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass, // generated ethereal password
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    to: "bar@example.com, baz@example.com", // list of receivers
+    subject: "Welkom je account is gemaakt", // Subject line
+    text: "Hallo je account is succesvol aangemaakt", // plain text body
+    html: output, // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
+)};
+// Einde nodemailer
+
 // connect mongoose
 const mongoose = require("mongoose");
 const myId = mongoose.Types.ObjectId;
