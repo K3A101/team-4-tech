@@ -35,7 +35,7 @@ app.get('/', async (req, res) => {
     const ress = await fetch('https://restcountries.com/v2/all');
     const countries = await ress.json();
 // render pagina verandert VAN HOME naar home-test
-    res.render('home-test', {
+    res.render('home', {
         countries: countries
 
     });
