@@ -41,6 +41,7 @@ app.get('/', async (req, res) => {
     });
 })
 
+
 // Aanmelden formulier
 app.get('/aanmelden',(req, res) => {
     res.render('aanmelden')
@@ -51,10 +52,11 @@ app.get('/registreren', (req, res) => {
     res.render('registreren')
 });
 
+// introduction page
+
 app.get('/introduction', (req, res) => {
     res.render('introduction');
 })
-
 
 app.get('/country/:country', async (req, res) => {
     const ress = await fetch(`https://restcountries.com/v2/alpha/${req.params.country}`);

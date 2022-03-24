@@ -1,3 +1,8 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
 *,
 *::after,
 *::before {
@@ -320,10 +325,6 @@ Bron: https: //www.youtube.com/watch?v=At4B7A4GOPg */
 
 }
 
-main p {
-    padding: 0 10px;
-}
-
 #samenvatting {
     display: flex;
     flex-direction: column;
@@ -479,6 +480,57 @@ input::placeholder {
 }
 
 #mijnlijst h1 {
-    margin-left: 40px;
-    margin-top: 40px;
+	margin-left: 40px;
+	margin-top: 40px;
+}
+
+
+
+
+
+/* INTRODUCTION PAGE */
+.header-img {
+	width: 100%;
+	height: 27rem;
+	background-image: url('../images/vakantie.jpg');
+	background-size: cover;
+}
+
+.introduction-page {
+	background-color: white;
+}
+
+.col-span-2 {
+	grid-column: span 2;
+}
+
+.grid-two-column {
+	padding: 2rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+
+.grid-three-column {
+	padding: 2rem;
+		display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 3rem;
+}
+
+.introduction-page .text-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.features {
+	background: #f6f6f6;
+	padding: 3rem 2rem;
+}
+
+.meta-section {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 3rem;
 }
