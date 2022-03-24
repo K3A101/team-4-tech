@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('includes/head'); -%>
+<link href="/css/style-test.css" rel="stylesheet">
+<body>
+    <%- include('includes/header'); -%>
+
+    <main>
+
+        <section>
+            <div class="container">
+                <input id="search" class="search" type="text" placeholder="Zoek een land" />
+
+                <div class="dropdown" id="filter">
+                    Kies een regio
+                    <ul>
+                        <li>All</li>
+                        <li>Africa</li>
+                        <li>Americas</li>
+                        <li>Asia</li>
+                        <li>Europe</li>
+                        <li>Oceania</li>
+                    </ul>
+                </div>
+                <div class="dropdown" id="filter2">
+                    Kies een taal
+                    <ul>
+                        <li>All</li>
+                        <li>Albanian</li>
+                        <li>Arabic</li>
+                        <li>Armenian</li>
+                        <li>Bulgarian</li>
+                        <li>Catalan</li>
+                        <li>Czech</li>
+                        <li>Dutch</li>
+                        <li>English</li>
+                        <li>French</li>
+                        <li>German</li>
+                        <li>Japanese</li>
+                        <li>Pashto</li>
+                        <li>Portuguese</li>
+                        <li>Spanish</li>
+                        <li>Swedish</li>
+                        <li>Vietnamese</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container countries" id="countries">
+
+                <% countries.forEach((country) => { %>
+                <div class="card">
+                    <form action="/mijnlijst" method="post">
+                        <div>
+                            <img src=<%= country.flag %> alt="vlag">
+                        </div>
+
+                        <div class="card-body">
+                            <h2 class="country-name"><%= country.name %></h2>
+                            <p class="country-region"><strong>Regio:</strong>
+                                <%= country.region %>
+                            </p>
+                            <p class="country-language"><strong>Taal:</strong>
+                                <%= country.languages[0].name %>
+                            </p>
+                            <label for="land">Land:</label>
+                            <input type="text" name="land" id="land" value="<%= country.name %>">
+
+                            <label for="populatie">Populatie:</label>
+                            <input type="text" name="populatie" id="populatie" value="<%= country.population %>">
+
+                            <label for="regio">Regio:</label>
+                            <input type="text" name="regio" id="regio" value="<%= country.population %>">
+
+                            <label for="capital">Hoofdstad:</label>
+                            <input type="text" name="capital" id="capital" value="<%= country.capital %>">
+
+                            <label for="language">Taal:</label>
+                            <input type="text" name="language" id="language" value="<%= country.languages[0].name %>">
+
+
+                        </div>
+                        <button type="submit">Meer info</button>
+                        <button type="submit">Submit</button>
+                        <!-- <input type="submit" value="Submit"> -->
+                    </form>
+                </div>
+                <% }) %>
+
+            </div>
+        </section>
+
+
+
+
+
+    </main>
+    <script src="/scripts/script.js"></script>
+</body>
+
+</html>
