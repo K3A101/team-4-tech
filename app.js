@@ -31,7 +31,10 @@ app.get('/', async (req, res) => {
     const ress = await fetch('https://restcountries.com/v2/all');
     const countries = await ress.json();
 
+
+
     console.log(countries)
+
 
     res.render('home', {
         countries: countries
@@ -82,7 +85,7 @@ app.get('/mijnlijst', async (req, res) => {
 })
 app.get('*', function (req, res) {
 
-    res.send('CANNOT FIND PAGE ERROR 404 (oepsie)', 404);
+    res.status('CANNOT FIND PAGE ERROR 404 (oepsie)', 404);
 
 });
 
