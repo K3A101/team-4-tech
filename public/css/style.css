@@ -1,17 +1,19 @@
 *,
 *::after,
 *::before {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 :root {
     --main-color: black;
     --secondary-color: #47A638;
-    --hightlight-color: rgb(112, 112, 248);
+    --highlight-color: #7070f8;
     --tekst-color: black;
     --background-color: white;
     --background-highlight-color: #ffffff;
-
+    --main-background-color: #B0D7F8;
 
     --shadow-color: #2F4F4F33;
 }
@@ -19,7 +21,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: rgb(147, 206, 255);
+    background-color: var(--main-background-color);
     font-family: 'Saira', sans-serif;
     color: var(--main-color);
 
@@ -187,13 +189,21 @@ header nav ul {
     padding: 0;
     list-style: none;
     display: flex;
-    gap: 1px;
+    gap: 3px;
     align-items: center;
 }
 
 header nav li {
-    flex-grow: 1;
+    /* flex-grow: 1; */
     min-width: 6em;
+}
+
+/* header nav li:last-of-type {
+    flex-grow: 3;
+} */
+
+header nav li:nth-last-of-type(2) {
+    margin-left: 45em;
 }
 
 header nav a {
@@ -208,7 +218,7 @@ header nav a {
 
 header nav a:hover {
 
-    color: var(--hightlight-color);
+    color: var(--highlight-color);
 }
 
 header nav a:focus {
@@ -216,7 +226,7 @@ header nav a:focus {
 }
 
 header nav li:last-of-type a {
-    background-color: var(--secondary-color);
+    background-color: var(--highlight-color);
     text-decoration: none;
     outline: none;
     color: white;
@@ -226,9 +236,11 @@ header nav li:last-of-type a {
     text-transform: uppercase;
 }
 
+
+
 header nav li:last-of-type a:hover {
     background-color: rgb(172, 255, 172);
-    color: var(--hightlight-color);
+    color: var(--highlight-color);
 }
 
 header nav li:last-of-type a:focus {
@@ -248,7 +260,7 @@ header nav li:last-of-type a:focus {
     justify-content: space-between;
     width: 40px;
     height: 32px;
-    background-color: var(--hightlight-color);
+    background-color: var(--highlight-color);
     z-index: 1;
 }
 
@@ -273,9 +285,13 @@ Bron: https: //www.youtube.com/watch?v=At4B7A4GOPg */
         right: 0;
     }
 
+    header nav li:nth-last-of-type(2) {
+        margin: 0;
+    }
+
     .toggle-button {
         display: flex;
-        border: 2px solid var(--hightlight-color);
+        border: 2px solid var(--highlight-color);
     }
 
     .links.active {
@@ -294,7 +310,7 @@ Bron: https: //www.youtube.com/watch?v=At4B7A4GOPg */
 
     .links ul li {
         text-align: left;
-        border-bottom: 1px solid var(--hightlight-color);
+        border-bottom: 1px solid var(--highlight-color);
     }
 
     .links ul li a {
@@ -436,6 +452,11 @@ input[type="submit"]:active {
 input[type="submit"]:hover {
     background-color: black;
     color: white;
+}
+
+input::placeholder {
+    appearance: none;
+    font-family: 'Saira', sans-serif;
 }
 
 /*Mijnlijst*/
