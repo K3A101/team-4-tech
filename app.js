@@ -41,6 +41,12 @@ app.get('/', async (req, res) => {
     });
 })
 
+// Aanmelden formulier
+app.get('/aanmelden',(req, res) => {
+    res.render('aanmelden')
+});
+
+
 app.get('/country/:country', async (req, res) => {
     const ress = await fetch(`https://restcountries.com/v2/alpha/${req.params.country}`);
     const countryData = await ress.json();

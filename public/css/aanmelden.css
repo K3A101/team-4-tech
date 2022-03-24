@@ -1,0 +1,130 @@
+/* Het aanmelden formulier */
+
+
+main {
+    margin: 4em auto;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    align-items: center;
+}
+
+/* main {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+} */
+
+section:last-of-type {
+
+    background-color: var(--background-color);
+    border-radius: 4px;
+}
+
+/* Naam van de website */
+h1 {
+    margin: 0 4em;
+    padding: 1em;
+    color: var(--background-color);
+    background-color: var(--main-color);
+    text-align: center;
+}
+
+/* Aanmelden titel */
+h2 {
+    font-size: 2em;
+    text-align: center;
+    padding: 1em;
+}
+
+/* Stijling voor het formulier */
+
+form {
+    padding: 5em 5em 10em 5em;
+    background-color: var(--background-color);
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06),
+        0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+fieldset {
+
+    display: flex;
+    flex-direction: column;
+    border: none;
+    margin-bottom: 3em;
+}
+
+/* Herinner mij checkbox*/
+fieldset:nth-of-type(3) {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 3em;
+}
+
+fieldset:nth-of-type(3) label {
+    flex-grow: 1;
+    font-weight: normal;
+    color: initial;
+}
+
+fieldset:nth-of-type(3) a {
+    text-align: right;
+    flex-grow: 1;
+    color: var(--main-color);
+
+}
+
+fieldset:nth-of-type(4) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2em;
+}
+
+input {
+    border: 1px solid var(--main-color);
+
+}
+
+/* Dit zijn de invoervelden */
+input[type="text"],
+input[type="password"] {
+    padding: 1em;
+    width: 500px;
+}
+
+label {
+    align-items: center;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* De registreer link */
+fieldset:nth-of-type(4) a {
+    text-align: center;
+    flex-grow: 1;
+    padding: 0.8em;
+    font-weight: bold;
+    color: var(--secondary-color);
+    background-color: var(--background-color);
+    border: 3px solid var(--secondary-color);
+    text-decoration: none;
+}
+
+/* Aanmelden button */
+button[type="submit"] {
+    flex-grow: 1;
+    font-size: 1em;
+    padding: 1em;
+    font-weight: bold;
+    color: var(--background-color);
+    background-color: var(--secondary-color);
+    border: 3px solid var(--secondary-color);
+    text-decoration: none;
+}
