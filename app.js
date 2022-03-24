@@ -41,7 +41,19 @@ app.get('/', async (req, res) => {
     });
 })
 
+
+// Aanmelden formulier
+app.get('/aanmelden',(req, res) => {
+    res.render('aanmelden')
+});
+
+// Registreren formulier
+app.get('/registreren', (req, res) => {
+    res.render('registreren')
+});
+
 // introduction page
+
 app.get('/introduction', (req, res) => {
     res.render('introduction');
 })

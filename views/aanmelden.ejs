@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('includes/head'); -%>
+<%- include('includes/header'); -%>
+
+<link rel="stylesheet" href="/css/aanmelden.css">
+
+<title>Aanmelden</title>
+
+<body>
+    <main>
+        <section>
+            <!-- Titel van het website -->
+            <h1>Reisplanner</h1>
+            <img src="#" alt="">
+        </section>
+        <section>
+            <h2>Aanmelden</h2>
+            <form action="">
+
+                <!-- Gebruikersnaam of email invoeren -->
+                <fieldset>
+                    <label for="email">Gebruikersnaam</label>
+                    <input type="text" name="email" id="email" placeholder="Gebruikersnaam of wachtwoord">
+                </fieldset>
+
+                <!-- Wachtwoord invoeren -->
+                <fieldset>
+                    <label for="wachtwoord">Wachtwoord</label>
+                    <input type="password" name="wachtwoord" placeholder="Wachtwoord">
+                </fieldset>
+
+                <!-- Inlog gegevens opslaan -->
+                <fieldset>
+
+                    <label for="herrineren">
+                        <input type="checkbox" name="herriner" id="herrineren"> Herinner me</label>
+                    <a href="#"> Wachtwoord vergeten</a>
+                </fieldset>
+
+                <fieldset>
+                    <!-- Gaat naar het registreren formulier pagina -->
+                    <a href="/registreren">Registreren</a>
+
+                    <!-- Wordt ingelogd -->
+                    <button type="submit">Aanmelden</button>
+                </fieldset>
+
+
+            </form>
+        </section>
+
+
+    </main>
+</body>
+
+</html>
