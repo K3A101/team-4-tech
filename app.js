@@ -38,6 +38,11 @@ app.get('/', async (req, res) => {
     });
 })
 
+// introduction page
+app.get('/introduction', (req, res) => {
+    res.render('introduction');
+})
+
 app.get('/country/:country', async (req, res) => {
     const ress = await fetch(`https://restcountries.com/v2/alpha/${req.params.country}`);
     const countryData = await ress.json();

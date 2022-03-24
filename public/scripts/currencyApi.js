@@ -41,11 +41,11 @@ fetch("https://api.frankfurter.app/currencies")
     });
 
 function display(data) {
-    // const valuta = Object.entries(data);
-    // for (var i = 0; i < valuta.length; i++) {
-    //     select[0].innerHTML += `<option value="${valuta[i][0]}">${valuta[i][0]}</option>`;
-    //     select[1].innerHTML += `<option value="${valuta[i][0]}">${valuta[i][0]}</option>`;
-    // }
+    const valuta = Object.entries(data);
+    for (var i = 0; i < valuta.length; i++) {
+        select[0].innerHTML += `<option value="${valuta[i][0]}">${valuta[i][0]}</option>`;
+        select[1].innerHTML += `<option value="${valuta[i][0]}">${valuta[i][0]}</option>`;
+    }
 }
 
 knop.addEventListener("click", () => {
