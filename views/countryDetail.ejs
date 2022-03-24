@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('includes/head'); -%>
+
+<body>
+  <%- include('includes/header'); -%>
+  <main>
+
+    <h1 id="country-name"><%= data.name %> </h1>
+    <article id="weather-data">
+
+    </article>
+    <article id="currency-data">
+
+    </article>
+
+    <section>
+      <h1>Bereken de waarde van je geld!</h1>
+
+      <div class="left_box">
+        <select name="currency" class="currency"></select>
+        <input type="number" name="" id="nummer">
+      </div>
+      <div class="right_box">
+        <select name="currency" class="currency"></select>
+        <input type="text" name="" id="antwoord" disabled>
+      </div>
+
+      <button class="knop" id="knop">Convert</button>
+    </section>
+
+
+  </main>
+  <script src="scripts/weatherapi.js"></script>
+  <script src="scripts/currencyapi.js"></script>
+</body>
+
+</html>
