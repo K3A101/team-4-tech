@@ -8,12 +8,8 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 const dotenv = require('dotenv').config();
-const {
-    MongoClient
-} = require('mongodb');
-const {
-    ObjectId
-} = require('mongodb');
+const { MongoClient } = require('mongodb');
+const { ObjectId } = require('mongodb');
 
 // connect mongoose
 const mongoose = require("mongoose");
@@ -28,19 +24,32 @@ app.use(express.urlencoded({
 }))
 // gebruik van ejs
 app.set('view engine', 'ejs');
+
+
 /* routes */
-
 app.get('/', async (req, res) => {
-
     const ress = await fetch('https://restcountries.com/v2/all');
     const countries = await ress.json();
-// render pagina verandert VAN HOME naar home-test
+
+
+
+    console.log(countries)
+
+
     res.render('home', {
         countries: countries
-
     });
-
 })
+
+app.get('/country/:country', async (req, res) => {
+    const ress = await fetch(`https://restcountries.com/v2/alpha/${req.params.country}`);
+    const countryData = await ress.json();
+
+    res.render('countryDetail', {
+        data: countryData
+    });
+})
+
 app.get('/profile/:name', function (req, res) {
     var data = {
         leeftijd: 20,
