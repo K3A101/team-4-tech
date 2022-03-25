@@ -5,6 +5,12 @@ const express = require('express')
 
 const app = express()
 
+const session = require('express-session');
+const passport = require('passport');
+const flash = require('express-flash')
+const methodOverride = require('method-override')
+const {checkAuthenticated, checkNotAuthenticated} = require('./middleware/authentification');
+
 const port = process.env.PORT || 3000;
 
 const dotenv = require('dotenv').config();
@@ -14,17 +20,47 @@ const { ObjectId } = require('mongodb');
 // connect mongoose
 const mongoose = require("mongoose");
 const myId = mongoose.Types.ObjectId;
+const User = require('./models/User');
 
 const fetch = require('node-fetch');
-const { checkNotAuthenticated } = require('./middleware/authentification');
+// const { checkNotAuthenticated } = require('./middleware/authentification');
+
+// Initieer passport (Gebruiker validatie)
+const initializePassport = require('./passport');
+const bcryptjs = require('bcryptjs');
+initializePassport(
+    passport,
+    async(username) => {
+        const userIsFound = await User.findOne({ username })
+        return userIsFound
+    },
+    async (id) => {
+        const userIsFound = await User.findOne({ _id: id });
+        return userIsFound;
+    }
+);
 
 let db = null;
 app.use(express.static('public'))
 app.use(express.urlencoded({
     extended: true
 }))
+app.use(flash());
+app.use(session({
+    secret: process.env.SESSION_SECRET_CODE,
+    resave: false,
+    saveUninitialized: false,
+})
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride('_method'));
+
 // gebruik van ejs
 app.set('view engine', 'ejs');
+
+
 
 
 /* routes */
@@ -68,15 +104,39 @@ app.get('/country/:country', async (req, res) => {
     });
 })
 
-app.get('/profile/:name', function (req, res) {
-    var data = {
-        leeftijd: 20,
-        geslacht: 'man'
-    };
-    res.render('profile', {
-        person: req.params.name,
-        data: data
-    });
+app.get('/profile/', checkAuthenticated, (req, res) => {
+    res.render('profile', { voornaam: req.user.voornaam });
+});
+
+app.post('/aanmelden', checkNotAuthenticated, passport.authenticate('local', {
+    successRedirect: '/profile',
+    failureRedirect: '/aanmelden',
+    failureFlash: true
+}))
+
+app.post('/registreren', checkNotAuthenticated, async (req, res) => {
+    const userIsFound = await User.findOne({email: req.body.email})
+
+    if(userIsFound) {
+        req.flash('error', 'Er bestaat al een account met dit emailadres')
+        res.redirect('/registreren');
+    } else {
+        try {
+            const passwordHash = await bcryptjs.hash(req.body.passowrd, 10)
+            const user = new User({
+                voornaam: req.body.voornaam,
+                achternaam: req.body.achternaam,
+                gebruikersnaam: req.body.gebruikersnaam,
+                email: req.body.email,
+                password: passwordHash
+            })
+            await user.save();
+            res.redirect('/aanmelden');
+        } catch (error) {
+            console.log(error);
+            res.redirect('/registreren');
+        }
+    }
 })
 /*app.get('/contact', async (req, res) => {
     const ress = await fetch('https://restcountries.com/v2/all');
