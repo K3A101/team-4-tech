@@ -26,7 +26,7 @@ const fetch = require('node-fetch');
 // const { checkNotAuthenticated } = require('./middleware/authentification');
 
 // Initieer passport (Gebruiker validatie)
-const initializePassport = require('./passport');
+const initializePassport = require('./middleware/passport');
 const bcryptjs = require('bcryptjs');
 initializePassport(
     passport,
