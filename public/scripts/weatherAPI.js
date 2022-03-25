@@ -1,13 +1,11 @@
 const fetchWeather = async () => {
 
   const countryName = document.getElementById('country-name').innerText
-  console.log(countryName)
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${countryName}?unitGroup=metric&key=T34UCHC8WQQH83SAKKUC7CLRC&contentType=json`;
 
   const response = await fetch(url);
   const data = await response.json();
 
-  console.log(data)
   setWeatherData(data)
 }
 

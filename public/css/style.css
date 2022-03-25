@@ -484,9 +484,28 @@ input::placeholder {
 	margin-top: 40px;
 }
 
+/*countryDetail*/
+#currencyvalue {
+	display: none;
+}
 
+#bereken_section {
+	margin: 1em;
+}
 
+.left_box input[type=number] {
+	width: 15em;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
 
+.right_box input[type=text] {
+	width: 15em;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+}
 
 /* INTRODUCTION PAGE */
 .header-img {

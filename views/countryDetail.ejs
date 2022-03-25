@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('includes/head'); -%>
-  <body>
-      <%- include('includes/header'); -%>
-      <main>
 
-        <h1 id="country-name"><%= data.name %> </h1>
-        <article id="weather-data">
+<body>
+  <%- include('includes/header'); -%>
+  <main>
 
-        </article>
+    <h1 id="country-name"><%= data.name %> </h1>
+    <article id="weather-data">
 
-        <section>
-          <h1>Bereken de waarde van je geld!</h1>
-          <div class="left_box">
-            <select name="currency" class="currency"></select>
-            <input type="number" name="" id="nummer">
-          </div>
+    </article>
 
-          <div class="right_box">
-            <select name="currency" class="currency"></select>
-            <input type="text" name="" id="antwoord" disabled>
-          </div>
+    <section id="bereken_section">
+      <h1>Bereken de waarde van je geld voordat je vertrekt!</h1>
+      <div class="left_box">
+        <label for="number">Euro:</label>
+        <input type="number" name="" id="nummer">
+      </div>
 
-          <button class="knop" id="knop">Convert</button>
-        </section>
+      <div class="right_box">
+        <label for="antwoord"><%= data.currencies[0].code %>:</label>
+        <input type="text" name="" id="antwoord" disabled>
+      </div>
 
-      </main>
-      <script src="/scripts/weatherAPI.js"></script>
-      <script src="/scripts/currencyApi.js"></script>
-  </body>
+
+    </section>
+    <p id="currencyvalue"><%= data.currencies[0].code %></p>
+  </main>
+  <script src="/scripts/weatherAPI.js"></script>
+  <script src="/scripts/currencyApi.js"></script>
+</body>
+
 </html>
