@@ -16,6 +16,7 @@ const mongoose = require("mongoose");
 const myId = mongoose.Types.ObjectId;
 
 const fetch = require('node-fetch');
+const { checkNotAuthenticated } = require('./middleware/authentification');
 
 let db = null;
 app.use(express.static('public'))
@@ -43,7 +44,7 @@ app.get('/', async (req, res) => {
 
 
 // Aanmelden formulier
-app.get('/aanmelden',(req, res) => {
+app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
     res.render('aanmelden')
 });
 
