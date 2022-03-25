@@ -9,7 +9,7 @@
     "compress": "{{ run command to compress files }}",
     "postcompress": "{{ executes AFTER `compress` script }}",
     "start": "node app.js",
-    "startdev": "nodemon app.js"
+    "watch": "nodemon app.js"
   },
   "author": "Michael Wilhelm",
   "license": "MIT",
