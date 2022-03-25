@@ -1,3 +1,0 @@
-DB_URI = mongodb+srv://{username}:{password}@bloktech.xaowg.mongodb.net
-DB_NAME = land
-TESTVAR = hijdoethet
