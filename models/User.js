@@ -1,14 +1,13 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const UserSchema = new mongoose.Schema ({
 
-const UserSchema = new Schema({
     voornaam: {
         type: String,
-        required: true                 /* Door hier 'required' aan toe te voegen geven we aan dat dit veld ingevuld MOET worden. */
+        // required: true                 /* Door hier 'required' aan toe te voegen geven we aan dat dit veld ingevuld MOET worden. */
     },
     achternaam: {
         type: String,
-        required: true
+        // required: true
     },
     gebruikersnaam: {
         type: String,
@@ -28,4 +27,4 @@ const UserSchema = new Schema({
 {collection: 'users'})
 
 const User = mongoose.model('User', UserSchema)
-module.exports = User
+module.exports = User;

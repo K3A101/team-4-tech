@@ -14,13 +14,18 @@ const {checkAuthenticated, checkNotAuthenticated} = require('./middleware/authen
 const port = process.env.PORT || 3000;
 
 const dotenv = require('dotenv').config();
-const { MongoClient } = require('mongodb');
-const { ObjectId } = require('mongodb');
+// const { MongoClient } = require('mongodb');
+// const { ObjectId } = require('mongodb');
 
 // connect mongoose
 const mongoose = require("mongoose");
-const myId = mongoose.Types.ObjectId;
+// const myId = mongoose.Types.ObjectId;
 const User = require('./models/User');
+
+const dbURI = process.env.DB_URI;
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
+    .then((result) => console.log('connected to database'))             /* Console.log om te checken of er een succesvolle connectie met de database is */
+    .catch((err) => console.log(err))
 
 const fetch = require('node-fetch');
 // const { checkNotAuthenticated } = require('./middleware/authentification');
@@ -31,7 +36,7 @@ const bcryptjs = require('bcryptjs');
 initializePassport(
     passport,
     async(username) => {
-        const userIsFound = await User.findOne({ username })
+        const userIsFound = await User.findOne({ email })
         return userIsFound
     },
     async (id) => {
@@ -40,7 +45,7 @@ initializePassport(
     }
 );
 
-let db = null;
+// let db = null;
 app.use(express.static('public'))
 app.use(express.urlencoded({
     extended: true
@@ -114,7 +119,7 @@ app.post('/aanmelden', checkNotAuthenticated, passport.authenticate('local', {
     failureFlash: true
 }))
 
-app.post('/registreren', checkNotAuthenticated, async (req, res) => {
+app.post('/registreren', async (req, res) => {
     const userIsFound = await User.findOne({email: req.body.email})
 
     if(userIsFound) {
@@ -122,18 +127,20 @@ app.post('/registreren', checkNotAuthenticated, async (req, res) => {
         res.redirect('/registreren');
     } else {
         try {
-            const passwordHash = await bcryptjs.hash(req.body.passowrd, 10)
+            const passwordHash = await bcryptjs.hash(req.body.wachtwoord, 10)
             const user = new User({
                 voornaam: req.body.voornaam,
                 achternaam: req.body.achternaam,
                 gebruikersnaam: req.body.gebruikersnaam,
                 email: req.body.email,
-                password: passwordHash
+                wachtwoord: passwordHash
             })
             await user.save();
             res.redirect('/aanmelden');
+            console.log("Account succesvol aangemaakt");
         } catch (error) {
             console.log(error);
+            console.log("Er is iets fout gegaan");
             res.redirect('/registreren');
         }
     }
@@ -171,26 +178,26 @@ app.get('*', function (req, res) {
  * Connect to database
  ****************************************************/
 // Sonja haar uitleg
-async function connectDB() {
-    const uri = process.env.DB_URI;
-    const client = new MongoClient(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-    try {
-        await client.connect();
-        db = client.db(process.env.DB_NAME);
-    } catch (error) {
-        throw error;
-    }
-}
+// async function connectDB() {
+//     const uri = process.env.DB_URI;
+//     const client = new MongoClient(uri, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//     });
+//     try {
+//         await client.connect();
+//         db = client.db(process.env.DB_NAME);
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 
 /*webserver starten*/
 
 app.listen(port, () => {
 
     console.log(`Example app listening on port ${port}`)
-    connectDB().then(() => console.log("We have a connection to Mongo!"));
+    // connectDB().then(() => console.log("We have a connection to Mongo!"));
 })
 
 //database inhoud sturen en ophalen: hulp van Sonja
@@ -201,49 +208,49 @@ app.post("/save-countries", (req, res) => {
     res.redirect("/mijnlijst")
 })*/
 
-app.post('/mijnlijst', async (req, res) => {
+// app.post('/mijnlijst', async (req, res) => {
 
-    // landinfo toevoegen via het id die in script.js is aangegeven in het aanmaken van formulier
+//     // landinfo toevoegen via het id die in script.js is aangegeven in het aanmaken van formulier
 
-    let form = {
+//     let form = {
 
-        land: req.body.land,
+//         land: req.body.land,
 
-        populatie: req.body.populatie,
+//         populatie: req.body.populatie,
 
-        regio: req.body.regio,
+//         regio: req.body.regio,
 
-        capital: req.body.capital,
+//         capital: req.body.capital,
 
-        language: req.body.language
-    };
+//         language: req.body.language
+//     };
 
-    // connection
-    // stuurt het als een form
-    await db.collection('landen').insertOne(form);
+//     // connection
+//     // stuurt het als een form
+//     await db.collection('landen').insertOne(form);
 
-    const allelanden = await db.collection('landen').find().toArray();
+//     const allelanden = await db.collection('landen').find().toArray();
 
 
-    // render de gestuurde data naar pagina
+//     // render de gestuurde data naar pagina
 
-    const title = "Mijn landen";
+//     const title = "Mijn landen";
 
-    res.render('mijnlijst', {
-        title,
-        allelanden
-    });
+//     res.render('mijnlijst', {
+//         title,
+//         allelanden
+//     });
 
-});
+// });
 
 // delete functie
-app.post("/delete/:id",
-    async (req, res) => {
+// app.post("/delete/:id",
+//     async (req, res) => {
 
-        db.collection('landen').deleteOne({
-            _id: ObjectId(req.params.id)
-        })
-        res.redirect("/mijnlijst");
-    });
+//         db.collection('landen').deleteOne({
+//             _id: ObjectId(req.params.id)
+//         })
+//         res.redirect("/mijnlijst");
+//     });
 
 //Sam slotenmaker vertelde over ObjectId(req.params.id) ipv dat ik _id: MyId moest gebruiken
