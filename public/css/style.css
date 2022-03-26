@@ -1,6 +1,6 @@
 * {
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 *,
@@ -218,7 +218,7 @@ header nav a:focus {
     text-decoration: underline;
 }
 
-header nav li:last-of-type a {
+header nav ul:last-of-type li:last-of-type a {
     background-color: var(--highlight-color);
     text-decoration: none;
     outline: none;
@@ -229,16 +229,20 @@ header nav li:last-of-type a {
     text-transform: uppercase;
 }
 
-
+header li {
+    list-style: none;
+}
 
 header nav li:last-of-type a:hover {
-    background-color: rgb(172, 255, 172);
+
     color: var(--highlight-color);
 }
 
 header nav li:last-of-type a:focus {
     text-decoration: underline;
 }
+
+
 
 /******************/
 /* HAMBURGERMENU */
@@ -326,7 +330,7 @@ img {
 }
 
 .container {
-    margin: 0;
+    margin: 0 auto;
     max-width: 1440px;
     padding: 30px;
 }
@@ -385,6 +389,8 @@ h1 {
 
 /* landen styling van bron Florin Pop*/
 .card {
+    position: relative;
+    margin-bottom: 1em;
     border-radius: 4px;
     background-color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
@@ -398,8 +404,32 @@ h1 {
     width: 100%;
 }
 
+.card a {
+    text-decoration: none !important;
+    color: var(--main-color);
+
+}
+
 .card-body {
+
     padding: 30px;
+}
+
+/* landen namen */
+.card-body h2 {
+    margin-bottom: .3em;
+    font-size: 1.8em;
+    border-bottom: 4px solid var(--secondary-color);
+
+}
+
+.card-body p {
+    padding: .5em;
+}
+
+.card-body span {
+
+    margin-left: 1em;
 }
 
 .card-body h3 {
@@ -411,6 +441,7 @@ h1 {
         grid-template-columns: repeat(1, 1fr);
     }
 }
+
 @media (max-width: 800px) {
     main section .container.countries {
         grid-template-columns: repeat(2, 1fr);
@@ -437,8 +468,11 @@ input {
 }
 
 input[type="submit"] {
-    background-color: lightgray;
-    color: black;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
     font-weight: bold;
     border: 0;
     padding: .7em;
@@ -450,7 +484,7 @@ input[type="submit"]:active {
 }
 
 input[type="submit"]:hover {
-    background-color: black;
+    background-color: var(--highlight-color);
     color: white;
 }
 
@@ -464,7 +498,7 @@ input::placeholder {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0;
+    margin: 0 auto;
     max-width: 1440px;
     padding: 30px;
     position: relative;
@@ -479,78 +513,78 @@ input::placeholder {
 }
 
 #mijnlijst h1 {
-	margin-left: 40px;
-	margin-top: 40px;
+    margin-left: 40px;
+    margin-top: 40px;
 }
 
 /*countryDetail*/
 #currencyvalue {
-	display: none;
+    display: none;
 }
 
 #bereken_section {
-	margin: 1em;
+    margin: 1em;
 }
 
 .left_box input[type=number] {
-	width: 15em;
-	padding: 12px 20px;
-	margin: 8px 0;
-	box-sizing: border-box;
+    width: 15em;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
 }
 
 .right_box input[type=text] {
-	width: 15em;
-	padding: 12px 20px;
-	margin: 8px 0;
-	box-sizing: border-box;
+    width: 15em;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
 }
 
 /* INTRODUCTION PAGE */
 .header-img {
-	width: 100%;
-	height: 27rem;
-	background-image: url('../images/vakantie.jpg');
-	background-size: cover;
+    width: 100%;
+    height: 27rem;
+    background-image: url('../images/vakantie.jpg');
+    background-size: cover;
 }
 
 .introduction-page {
-	background-color: white;
+    background-color: white;
 }
 
 .col-span-2 {
-	grid-column: span 2;
+    grid-column: span 2;
 }
 
 .grid-two-column {
-	padding: 2rem;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 1rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 }
 
 .grid-three-column {
-	padding: 2rem;
-		display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 3rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
 }
 
 .introduction-page .text-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .features {
-	background: #f6f6f6;
-	padding: 3rem 2rem;
+    background: #f6f6f6;
+    padding: 3rem 2rem;
 }
 
 .meta-section {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
 }
 
 /* Profielpagina */
