@@ -33,7 +33,7 @@ In het concept waar er al verschillende functionaliteiten toegevoegd zoals:
 - Landen uit het lijst verwijderen. 
 
 
-## Aaanpasingen
+## Aanpassingen
 
 ### Nieuwe functionaliteiten 
 Om het prototype compleet te maken hebben we meer features toegevoegd zoals:
