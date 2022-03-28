@@ -35,7 +35,7 @@ const initializePassport = require('./middleware/passport');
 const bcryptjs = require('bcryptjs');
 initializePassport(
     passport,
-    async(username) => {
+    async(email) => {
         const userIsFound = await User.findOne({ email })
         return userIsFound
     },
@@ -110,7 +110,7 @@ app.get('/country/:country', async (req, res) => {
 })
 
 app.get('/profile/', (req, res) => {
-    res.render('profile', { voornaam: req.user.voornaam });
+    res.render('profile', { email: req.user.email });
 });
 
 app.post('/aanmelden', passport.authenticate('local', {
