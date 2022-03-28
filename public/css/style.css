@@ -556,12 +556,18 @@ input::placeholder {
     grid-column: span 2;
 }
 
+.col-span-3 {
+    grid-column: span 3;
+}
+
 .grid-two-column {
     padding: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
+
+.
 
 .grid-three-column {
     padding: 2rem;
@@ -584,12 +590,16 @@ input::placeholder {
 .meta-section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
+    gap: 2rem;
+    padding: 2rem;
 }
 
 .meta-section article {
     display: flex;
     align-items: center;
+    padding: 1.5rem;
+    gap: 2rem;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
 }
 
 .meta-section article img {
