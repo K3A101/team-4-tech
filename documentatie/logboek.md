@@ -66,7 +66,7 @@ Wat we hebben besproken:
 ### Sjoerd
 - Weather API onderzoeken en in het project geimplemteerd
 - Introductiepagina gemaakt en iets.... geimplementeerd 
-- Backend Topic:
+- Backend Topic: 
 
 ### Luc
 - Het registreer en log in functie gewerkt en in het prototype toegevoegd.
