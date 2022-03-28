@@ -47,7 +47,7 @@ const fillDeveloperData = (data) => {
 
     const container = document.createElement("article");
 
-    const title = document.createElement("h2");
+    const title = document.createElement("h3");
     title.innerHTML = item.attributes.name;
 
     const desc = document.createElement("p");
@@ -74,7 +74,7 @@ const fillFeaturesData = (data) => {
   data.forEach((item) => {
     const container = document.createElement("article");
 
-    const title = document.createElement("h2");
+    const title = document.createElement("h3");
     title.innerHTML = item.attributes.title;
 
     const body = document.createElement("p");

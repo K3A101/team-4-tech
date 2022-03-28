@@ -1,57 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<%- include('includes/head'); -%>
-<%- include('includes/header'); -%>
+<section class="register-container">
+    <section>
+        <h2>Aanmelden</h2>
+        <form action="/aanmelden" method="post">
 
-<link rel="stylesheet" href="/css/aanmelden.css">
+            <!-- Gebruikersnaam of email invoeren -->
+            <fieldset>
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" placeholder="Gebruikersnaam of wachtwoord">
+            </fieldset>
 
-<title>Aanmelden</title>
+            <!-- Wachtwoord invoeren -->
+            <fieldset>
+                <label for="wachtwoord">Wachtwoord</label>
+                <input type="password" name="wachtwoord" placeholder="Wachtwoord">
+            </fieldset>
 
-<body>
-    <main>
-        <section>
-            <!-- Titel van het website -->
-            <h1>Reisplanner</h1>
-            <img src="#" alt="">
-        </section>
-        <section>
-            <h2>Aanmelden</h2>
-            <form action="/aanmelden" method="post">
+            <!-- Inlog gegevens opslaan -->
+            <fieldset>
 
-                <!-- Gebruikersnaam of email invoeren -->
-                <fieldset>
-                    <label for="email">Email</label>
-                    <input type="text" name="email" id="email" placeholder="Gebruikersnaam of wachtwoord">
-                </fieldset>
+                <label for="herrineren">
+                    <input type="checkbox" name="herriner" id="herrineren"> Herinner me</label>
+                <a href="#"> Wachtwoord vergeten</a>
+            </fieldset>
+            <fieldset>
+                <!-- Gaat naar het registreren formulier pagina -->
+                <a href="/registreren">Registreren</a>
 
-                <!-- Wachtwoord invoeren -->
-                <fieldset>
-                    <label for="wachtwoord">Wachtwoord</label>
-                    <input type="password" name="wachtwoord" placeholder="Wachtwoord">
-                </fieldset>
-
-                <!-- Inlog gegevens opslaan -->
-                <fieldset>
-
-                    <label for="herrineren">
-                        <input type="checkbox" name="herriner" id="herrineren"> Herinner me</label>
-                    <a href="#"> Wachtwoord vergeten</a>
-                </fieldset>
-                <fieldset>
-                    <!-- Gaat naar het registreren formulier pagina -->
-                    <a href="/registreren">Registreren</a>
-
-                    <!-- Wordt ingelogd -->
-                    <button type="submit">Aanmelden</button>
-                </fieldset>
+                <!-- Wordt ingelogd -->
+                <button type="submit">Aanmelden</button>
+            </fieldset>
 
 
-            </form>
-        </section>
+        </form>
+    </section>
 
+    <section class="image-container">
 
-    </main>
-</body>
-
-</html>
+    </section>
+</section>

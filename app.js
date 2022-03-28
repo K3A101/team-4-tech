@@ -2,6 +2,7 @@
 //en pagina's kan maken met app.get
 
 const express = require('express')
+const expressLayouts = require('express-ejs-layouts');
 
 const app = express()
 
@@ -25,7 +26,7 @@ const User = require('./models/User');
 
 const dbURI = process.env.DB_URI;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
-    .then((result) => console.log('connected to database'))             /* Console.log om te checken of er een succesvolle connectie met de database is */
+    .then((result) => console.log('connected to database'))
     .catch((err) => console.log(err))
 
 const fetch = require('node-fetch');
@@ -64,20 +65,15 @@ app.use(passport.session());
 app.use(methodOverride('_method'));
 
 // gebruik van ejs
+app.use(expressLayouts);
+app.set('layout', './partials/layout');
 app.set('view engine', 'ejs');
-
-
 
 
 /* routes */
 app.get('/', async (req, res) => {
     const ress = await fetch('https://restcountries.com/v2/all');
     const countries = await ress.json();
-
-
-
-    console.log(countries)
-
 
     res.render('home', {
         countries: countries
@@ -96,7 +92,6 @@ app.get('/registreren', (req, res) => {
 });
 
 // introduction page
-
 app.get('/introduction', (req, res) => {
     res.render('introduction');
 })
@@ -114,10 +109,13 @@ app.get('/profile/', (req, res) => {
     res.render('profile', { voornaam: req.user.voornaam });
 });
 
-app.post('/aanmelden', passport.authenticate('local', {
-    successRedirect: '/profile',
-    failureRedirect: '/registreren',
-    failureFlash: true
+app.post('/aanmelden', passport.authenticate('local', (req, res) => {
+    console.log(successRedirect);
+    console.log(failureRedirect);
+
+    // successRedirect: '/profile',
+    // failureRedirect: '/registreren',
+    // failureFlash: true
 }))
 
 app.post('/registreren',
