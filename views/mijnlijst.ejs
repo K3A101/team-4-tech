@@ -1,32 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<section>
+    <% allelanden.forEach(function(landen){ %>
 
-<%- include('includes/head'); -%>
+    <section>
 
-<body id="mijnlijst">
-    <%- include('includes/header'); -%>
-    <h1><%= title %></h1>
-    <main>
+        <h2><%= landen.land %></h2>
+        <h3>Populatie: <%= landen.populatie %></h3>
+        <h3>Regio: <%= landen.regio %></h3>
+        <h3>Hoofdstad: <%= landen.capital %></h3>
+        <h3>Taal: <%= landen.language %></h3>
 
-        <% allelanden.forEach(function(landen){ %>
+        <form action="/delete/<%= landen._id %>" method="POST">
+            <button type="submit">Verwijder</button>
+        </form>
+    </section>
+    <% }) %>
+</section>
 
-        <section>
-
-            <h2><%= landen.land %></h2>
-            <h3>Populatie: <%= landen.populatie %></h3>
-            <h3>Regio: <%= landen.regio %></h3>
-            <h3>Hoofdstad: <%= landen.capital %></h3>
-            <h3>Taal: <%= landen.language %></h3>
-
-            <form action="/delete/<%= landen._id %>" method="POST">
-                <button type="submit">Verwijder</button>
-            </form>
-        </section>
-        <% }) %>
-
-    </main>
-
-</body>
 <script src="/scripts/script.js"></script>
-
-</html>

@@ -1,67 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<%- include('includes/head'); -%>
-<%- include('includes/header'); -%>
+<section class="register-container">
+    <section>
+        <h2>Registreren</h2>
+        <form action="/registreren" method="post">
 
-<link rel="stylesheet" href="/css/registreren.css">
+            <!-- Volledige naam invoeren -->
+            <fieldset>
+                <label for="voornaam">Jouw naam</label>
 
-<body>
+                <div class="volledige-naam">
+                    <input type="text" name="voornaam" id="voornaam" placeholder="Voornaam">
+                    <input type="text" name="achternaam" id="achternaam" placeholder="Achternaam">
+                </div>
+            </fieldset>
 
-    <main>
-        <section>
-            <!-- Titel van het website -->
-            <h1>Reisplanner</h1>
-            <img src="#" alt="">
-        </section>
-        <section>
-            <h2>Registreren</h2>
-            <form action="/registreren" method="post">
+            <!--Gebruikersnaam invoeren -->
+            <fieldset>
+                <label for="gebruikersnaam">Gebruikersnaam</label>
+                <input type="text" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam">
+            </fieldset>
 
-                <!-- Volledige naam invoeren -->
-                <fieldset>
-                    <label for="voornaam">Jouw naam</label>
+            <!-- Email invoeren -->
+            <fieldset>
+                <label for="email">Email</label>
+                <input type="mail" name="email" id="email" placeholder="Email">
+            </fieldset>
+            <!-- Wachtwoord invoeren -->
+            <fieldset>
+                <label for="wachtwoord">Wachtwoord</label>
+                <input type="password" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord">
+            </fieldset>
 
-                    <div class="volledige-naam">
-                        <input type="text" name="voornaam" id="voornaam" placeholder="Voornaam">
-                        <input type="text" name="achternaam" id="achternaam" placeholder="Achternaam">
-                    </div>
-                </fieldset>
+                        
 
-                <!--Gebruikersnaam invoeren -->
-                <fieldset>
-                    <label for="gebruikersnaam">Gebruikersnaam</label>
-                    <input type="text" name="gebruikersnaam" id="gebruikersnaam" placeholder="Gebruikersnaam">
-                </fieldset>
+            <fieldset>
+                <!-- Gaat naar het aanmeld formulier pagina om in te loggen -->
+                <a href="/aanmelden">Aanmelden</a>
 
-                <!-- Email invoeren -->
-                <fieldset>
-                    <label for="email">Email</label>
-                    <input type="mail" name="email" id="email" placeholder="Email">
-                </fieldset>
-                <!-- Wachtwoord invoeren -->
-                <fieldset>
-                    <label for="wachtwoord">Wachtwoord</label>
-                    <input type="password" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord">
-                </fieldset>
-
-                           
-
-                <fieldset>
-                    <!-- Gaat naar het aanmeld formulier pagina om in te loggen -->
-                    <a href="/aanmelden">Aanmelden</a>
-
-                    <!-- Wordt geregistreerd -->
-                    <button type="submit">Registreren</button>
-                </fieldset>
+                <!-- Wordt geregistreerd -->
+                <button type="submit">Registreren</button>
+            </fieldset>
 
 
-            </form>
-        </section>
+        </form>
+    </section>
 
-
-    </main>
-
-</body>
-
-</html>
+    <section class="image-container">
+    </section>
+</section>
