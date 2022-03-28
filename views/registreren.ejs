@@ -16,15 +16,15 @@
         </section>
         <section>
             <h2>Registreren</h2>
-            <form action="">
+            <form action="/registreren" method="post">
 
                 <!-- Volledige naam invoeren -->
                 <fieldset>
                     <label for="voornaam">Jouw naam</label>
 
                     <div class="volledige-naam">
-                        <input type="text" name="naam" id="voornaam" placeholder="Voornaam">
-                        <input type="text" naam="naam" id="achternaam" placeholder="Achternaam">
+                        <input type="text" name="voornaam" id="voornaam" placeholder="Voornaam">
+                        <input type="text" name="achternaam" id="achternaam" placeholder="Achternaam">
                     </div>
                 </fieldset>
 
@@ -42,17 +42,17 @@
                 <!-- Wachtwoord invoeren -->
                 <fieldset>
                     <label for="wachtwoord">Wachtwoord</label>
-                    <input type="password" name="wachtwoord" placeholder="Wachtwoord">
+                    <input type="password" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord">
                 </fieldset>
 
                            
 
                 <fieldset>
                     <!-- Gaat naar het aanmeld formulier pagina om in te loggen -->
-                    <a href="/aanmelden">Registreren</a>
+                    <a href="/aanmelden">Aanmelden</a>
 
                     <!-- Wordt geregistreerd -->
-                    <button type="submit">Aanmelden</button>
+                    <button type="submit">Registreren</button>
                 </fieldset>
 
 
