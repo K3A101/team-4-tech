@@ -587,6 +587,16 @@ input::placeholder {
     gap: 3rem;
 }
 
+.meta-section article {
+    display: flex;
+    align-items: center;
+}
+
+.meta-section article img {
+    width: 9rem;
+    height: fit-content;
+}
+
 /* Profielpagina */
 #profiel-titel,
 .profielpagina {
