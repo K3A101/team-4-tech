@@ -11,6 +11,7 @@ const flash = require('express-flash')
 const methodOverride = require('method-override')
 const {checkAuthenticated, checkNotAuthenticated} = require('./middleware/authentification');
 
+const { check, validationResult } = require('express-validator');
 const port = process.env.PORT || 3000;
 
 const dotenv = require('dotenv').config();
@@ -119,7 +120,15 @@ app.post('/aanmelden', passport.authenticate('local', {
     failureFlash: true
 }))
 
-app.post('/registreren', async (req, res) => {
+app.post('/registreren',
+
+// Een email moet een email zijn 
+check('email').isEmail(),
+
+// Wachtwoord moet minimaal 5 karakters zijn 
+check('wachtwoord').isLength({min: 5}),
+
+async (req, res) => {
     const userIsFound = await User.findOne({email: req.body.email, gebruikersnaam: req.body.gebruikersnaam})
 
     if(userIsFound) {
