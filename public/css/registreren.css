@@ -1,21 +1,27 @@
-main {
-    margin: 4em auto;
-    width: 80%;
+.register-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
 }
 
+.register-container section {
+    background-color: white;
+}
 
+.register-container .image-container {
+    height: 100%;
+    width: 100%;
+	background-image: url('../images/holliday.jpg');
+    background-size: cover;
+}
 
-section:last-of-type {
-
+.register-container section:last-of-type {
     background-color: var(--background-color);
     border-radius: 4px;
 }
 
 /* Naam van de website */
-h1 {
+.register-container h1 {
     margin: 0 4em;
     padding: 1em;
     color: var(--background-color);
@@ -24,7 +30,7 @@ h1 {
 }
 
 /* Aanmelden titel */
-h2 {
+.register-container h2 {
     font-size: 2em;
     text-align: center;
     padding: 1em;
@@ -32,16 +38,11 @@ h2 {
 
 /* Stijling voor het formulier */
 
-form {
+.register-container form {
     padding: 5em 5em 10em 5em;
-    background-color: var(--background-color);
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06),
-        0 1px 2px rgba(0, 0, 0, 0.12);
 }
 
-fieldset {
-
+.register-container fieldset {
     display: flex;
     flex-direction: column;
     border: none;
@@ -49,9 +50,8 @@ fieldset {
 }
 
 
-input {
+.register-container input {
     border: 1px solid var(--main-color);
-
 }
 
 /* Dit zijn de invoervelden */
@@ -59,27 +59,26 @@ input[type="text"],
 input[type="password"],
 input[type="mail"] {
     padding: 1em;
-    width: 500px;
 }
 
-label {
+.register-container label {
     align-items: center;
     color: var(--secondary-color);
     font-weight: bold;
 }
 
 /* Voor de voor- en achternaam input velden */
-.volledige-naam {
+.register-container .volledige-naam {
     display: flex;
     flex-direction: row;
     gap: 3em;
 }
 
-.volledige-naam input {
+.register-container .volledige-naam input {
     width: 230px;
 }
 
-fieldset:nth-of-type(5) {
+.register-container fieldset:nth-of-type(5) {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -87,7 +86,7 @@ fieldset:nth-of-type(5) {
 }
 
 /* De aanmeld link */
-fieldset:nth-of-type(5) a {
+.register-container fieldset:nth-of-type(5) a {
     text-align: center;
     flex-grow: 1;
     padding: 0.8em;
@@ -99,7 +98,7 @@ fieldset:nth-of-type(5) a {
 }
 
 /* registreer button */
-button[type="submit"] {
+.register-container button[type="submit"] {
     flex-grow: 1;
     font-size: 1em;
     padding: 1em;
