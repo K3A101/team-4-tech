@@ -3,6 +3,7 @@
 
 <%- include('includes/head'); -%>
 <!-- <link href="/css/style-test.css" rel="stylesheet"> -->
+
 <body>
     <%- include('includes/header'); -%>
 
@@ -55,7 +56,7 @@
                 <div class="card">
                     <a href="/country/<%= country.alpha3Code %> ">
                         <img src=<%= country.flag %> alt="vlag">
-                        
+
                         <div class="card-body">
                             <h2 class="country-name"><%= country.name %></h2>
                             <p class="country-region"><strong>Regio:</strong> <span><%= country.region %></span></p>
@@ -67,11 +68,12 @@
                     </a>
 
                     <form action="/mijnlijst" method="post">
-                            <input type="hidden" name="land" id="land" value="<%= country.name %>">
-                            <input type="hidden" name="populatie" id="populatie" value="<%= country.population %>">
-                            <input type="hidden" name="regio" id="regio" value="<%= country.region %>">
-                            <input type="hidden" name="capital" id="capital" value="<%= country.capital %>">
-                            <input type="hidden" name="language" id="language" value="<%= country.languages[0].name %>">
+                        <img src=<%= country.flag %> alt="vlag">
+                        <input type="hidden" name="land" id="land" value="<%= country.name %>">
+                        <input type="hidden" name="populatie" id="populatie" value="<%= country.population %>">
+                        <input type="hidden" name="regio" id="regio" value="<%= country.region %>">
+                        <input type="hidden" name="capital" id="capital" value="<%= country.capital %>">
+                        <input type="hidden" name="language" id="language" value="<%= country.languages[0].name %>">
                         <input type="submit" value="Submit">
                     </form>
                 </div>
