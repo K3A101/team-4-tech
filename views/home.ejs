@@ -58,10 +58,11 @@
                         
                         <div class="card-body">
                             <h2 class="country-name"><%= country.name %></h2>
-                            <p><strong>Regio:</strong> <%= country.region %></p>
-                            <p><strong>Populatie: </strong><%= country.population %></p>
-                            <p><strong>Hoofdstad:</strong><%= country.capital %></p>
-                            <p><strong>Taal:</strong><%= country.languages[0].name %></p>
+                            <p class="country-region"><strong>Regio:</strong> <span><%= country.region %></span></p>
+                            <p><strong>Populatie: </strong><span><%= country.population %></span></p>
+                            <p><strong>Hoofdstad:</strong><span><%= country.capital %></span></p>
+                            <p class="country-language">
+                                <strong>Taal:</strong><span><%= country.languages[0].name %></span></p>
                         </div>
                     </a>
 

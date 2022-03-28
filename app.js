@@ -109,21 +109,21 @@ app.get('/country/:country', async (req, res) => {
     });
 })
 
-app.get('/profile/', checkAuthenticated, (req, res) => {
+app.get('/profile/', (req, res) => {
     res.render('profile', { voornaam: req.user.voornaam });
 });
 
-app.post('/aanmelden', checkNotAuthenticated, passport.authenticate('local', {
+app.post('/aanmelden', passport.authenticate('local', {
     successRedirect: '/profile',
-    failureRedirect: '/aanmelden',
+    failureRedirect: '/registreren',
     failureFlash: true
 }))
 
 app.post('/registreren', async (req, res) => {
-    const userIsFound = await User.findOne({email: req.body.email})
+    const userIsFound = await User.findOne({email: req.body.email, gebruikersnaam: req.body.gebruikersnaam})
 
     if(userIsFound) {
-        req.flash('error', 'Er bestaat al een account met dit emailadres')
+        req.flash('error', 'Er bestaat al een account met dit emailadres.')
         res.redirect('/registreren');
     } else {
         try {
@@ -135,7 +135,9 @@ app.post('/registreren', async (req, res) => {
                 email: req.body.email,
                 wachtwoord: passwordHash
             })
+            
             await user.save();
+            // await db.collection('users').insertOne(user)
             res.redirect('/aanmelden');
             console.log("Account succesvol aangemaakt");
         } catch (error) {

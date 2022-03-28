@@ -1,5 +1,7 @@
+#
+
 # Het Concept Favoriete vakantiebestemming
-We gaan een matching applicatie maken voor vakantieliefhebber.Op deze website kunnen ze vanuit verschillende landen zoeken en ook filtreren op basis van een bepaalde voorkeur.Vervolgens kunnen ze een profiel hebben waar de gebruikers hun favoriete landen kunnen opslaan. Daarnaast is het ook mogelijk om  meer  gedetailleerde informatie te vinden over een bepaalde land bijvoorbeekd, wat voor soort weer hebben ze daar, aantal foto's van die eiland ect. Als toevoeging kunnen ze de wisselkoers tussen landen kunnen meten. Daarmee kunnen ze zich voorbereiden voor het vakantie.
+We gaan een matching applicatie maken voor vakantieliefhebber en mensen die interesse hebben op ander landen. Op deze website kunnen ze vanuit verschillende landen zoeken en ook filtreren op basis van een bepaalde voorkeur.Vervolgens kunnen ze een profiel hebben waar de gebruikers hun favoriete landen kunnen opslaan. Daarnaast is het ook mogelijk om  meer  gedetailleerde informatie te vinden over een bepaalde land bijvoorbeekd, wat voor soort weer hebben ze daar, aantal foto's van die eiland ect. Als toevoeging kunnen ze de wisselkoers tussen landen kunnen meten. Daarmee kunnen ze zich voorbereiden voor het vakantie.
 
 
 ## Job Stories 
@@ -21,3 +23,4 @@ We gaan een matching applicatie maken voor vakantieliefhebber.Op deze website ku
 - Gebruiker moet afbeeldingen kunnen zien van die land 
 - Gebruiker moet de wisselkoers tussen landen kunnen meten
 - Gebruiker moet een beeld krijgen hoe het weer op dat moment in die land is. 
+

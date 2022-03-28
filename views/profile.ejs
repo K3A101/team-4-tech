@@ -3,12 +3,42 @@
 
 <%- include('includes/head'); -%>
 
+
 <body>
     <%- include('includes/header'); -%>
-    <main>
-        <h1>Welkom op het profiel van <%= person %></h1>
-        <p><strong>Leeftijd: </strong><%= data.leeftijd %></p>
-        <p><strong>Geslacht: </strong><%= data.geslacht %></p>
+
+    <h1 id="profiel-titel">Profiel van <%= person %></h1>
+    <main class="profielpagina">
+        <figure class="profielfoto">
+            <img src="#" alt="Gebruikersprofiel">
+        </figure>
+
+        <section class="profiel-gegevens">
+            <h2>Naam</h2>
+            <ul>
+                <li>Voornaam</li>
+                <li>Achternaam</li>
+            </ul>
+        </section>
+
+        <section class="profiel-gegevens">
+            <h2>Gebruikersnaam</h2>
+            <p>Gebruikersnaam</p>
+        </section>
+
+        <section class="profiel-gegevens">
+            <h2>Email</h2>
+            <p>Voorbeeld@email.com</p>
+        </section>
+
+        <section class="profiel-gegevens">
+            <p><strong>Leeftijd: </strong><%= data.leeftijd %></p>
+            <p><strong>Geslacht: </strong><%= data.geslacht %></p>
+        </section>
+
+        <!-- Link naar mijn lijst pagina  -->
+        <a class="lijst-link" href="/mijnlijst">Mijn Lijst</a>
+
     </main>
 
 </body>

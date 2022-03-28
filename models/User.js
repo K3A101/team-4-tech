@@ -3,11 +3,11 @@ const UserSchema = new mongoose.Schema ({
 
     voornaam: {
         type: String,
-        // required: true                 /* Door hier 'required' aan toe te voegen geven we aan dat dit veld ingevuld MOET worden. */
+        required: true                 /* Door hier 'required' aan toe te voegen geven we aan dat dit veld ingevuld MOET worden. */
     },
     achternaam: {
         type: String,
-        // required: true
+        required: true
     },
     gebruikersnaam: {
         type: String,
