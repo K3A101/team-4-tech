@@ -53,13 +53,16 @@ const fillDeveloperData = (data) => {
     const desc = document.createElement("p");
     desc.innerHTML = item.attributes.description;
 
+    const textContainer = document.createElement("div");
+
     const image = document.createElement("img");
     image.src = image_url;
     image.alt = item.attributes.image.data.attributes.caption;
 
+    textContainer.appendChild(title);
+    textContainer.appendChild(desc);
     container.appendChild(image);
-    container.appendChild(title);
-    container.appendChild(desc);
+    container.appendChild(textContainer);
     devContainer.appendChild(container);
 
   })
