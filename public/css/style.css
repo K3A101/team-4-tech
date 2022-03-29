@@ -567,8 +567,6 @@ input::placeholder {
     gap: 1rem;
 }
 
-.
-
 .grid-three-column {
     padding: 2rem;
     display: grid;
@@ -656,4 +654,23 @@ input::placeholder {
     color: var(--background-color);
     background-color: var(--secondary-color);
     padding: 0.8em;
+}
+
+/* Toaster */
+.toaster {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 1rem 2rem;
+    max-width: 30rem;
+    color: white;
+}
+
+.toaster p {
+    margin: 0.5rem 0;
+    border-radius: 4px;
+    background: rgb(236, 47, 47);
+    padding: 1rem 2rem;
+    margin-bottom: 0.1rem;
+    list-style: disc;
 }

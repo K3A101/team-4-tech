@@ -11,10 +11,19 @@ const session = require('express-session');
 const passport = require('passport');
 const flash = require('express-flash')
 const methodOverride = require('method-override')
-const {checkAuthenticated, checkNotAuthenticated} = require('./middleware/authentification');
+const {
+    checkAuthenticated,
+    checkNotAuthenticated
+} = require('./middleware/authentification');
 const bodyParser = require('body-parser')
-const { check, validationResult } = require('express-validator');
-const { validateUserSignUp, userValidation } = require( './middleware/user-validation')
+const {
+    check,
+    validationResult
+} = require('express-validator');
+const {
+    validateUserSignUp,
+    userValidation
+} = require('./middleware/user-validation')
 const port = process.env.PORT || 3000;
 
 const dotenv = require('dotenv').config();
@@ -27,7 +36,10 @@ const mongoose = require("mongoose");
 const User = require('./models/User');
 
 const dbURI = process.env.DB_URI;
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(dbURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
     .then((result) => console.log('connected to database'))
     .catch((err) => console.log(err))
 
@@ -37,17 +49,23 @@ const fetch = require('node-fetch');
 // Initieer passport (Gebruiker validatie)
 const initializePassport = require('./middleware/passport');
 const bcryptjs = require('bcryptjs');
-const { urlencoded } = require('express');
+const {
+    urlencoded
+} = require('express');
 initializePassport(
     passport,
-    async(username) => {
-        const userIsFound = await User.findOne({ email })
-        return userIsFound
-    },
-    async (id) => {
-        const userIsFound = await User.findOne({ _id: id });
-        return userIsFound;
-    }
+    async (username) => {
+            const userIsFound = await User.findOne({
+                email
+            })
+            return userIsFound
+        },
+        async (id) => {
+            const userIsFound = await User.findOne({
+                _id: id
+            });
+            return userIsFound;
+        }
 );
 
 app.use(bodyParser.json());
@@ -65,8 +83,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET_CODE,
     resave: false,
     saveUninitialized: false,
-})
-);
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -96,7 +113,10 @@ app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
 
 // Registreren formulier
 app.get('/registreren', (req, res) => {
-    res.render('registreren')
+    const err = null;
+    res.render('registreren', {
+        err: err
+    })
 });
 
 // introduction page
@@ -114,7 +134,9 @@ app.get('/country/:country', async (req, res) => {
 })
 
 app.get('/profile/', (req, res) => {
-    res.render('profile', { voornaam: req.user.voornaam });
+    res.render('profile', {
+        voornaam: req.user.voornaam
+    });
 });
 
 app.post('/aanmelden', passport.authenticate('local', (req, res) => {
@@ -128,34 +150,38 @@ app.post('/aanmelden', passport.authenticate('local', (req, res) => {
 
 app.post('/registreren', validateUserSignUp, userValidation,
 
-async (req, res) => {
-    const userIsFound = await User.findOne({email: req.body.email, gebruikersnaam: req.body.gebruikersnaam})
+    async (req, res) => {
+        const userIsFound = await User.findOne({
+            email: req.body.email,
+            gebruikersnaam: req.body.gebruikersnaam
+        })
 
-    if(userIsFound) {
-        req.flash('error', 'Er bestaat al een account met dit emailadres.')
-        res.redirect('/registreren');
-    } else {
-        try {
-            const passwordHash = await bcryptjs.hash(req.body.wachtwoord, 10)
-            const user = new User({
-                voornaam: req.body.voornaam,
-                achternaam: req.body.achternaam,
-                gebruikersnaam: req.body.gebruikersnaam,
-                email: req.body.email,
-                wachtwoord: passwordHash
-            })
-            
-            await user.save();
-            // await db.collection('users').insertOne(user)
-            res.redirect('/aanmelden');
-            console.log("Account succesvol aangemaakt");
-        } catch (error) {
-            console.log(error);
-            console.log("Er is iets fout gegaan");
+        if (userIsFound) {
+            req.flash('error', 'Er bestaat al een account met dit emailadres.')
             res.redirect('/registreren');
+        } else {
+            try {
+                const passwordHash = await bcryptjs.hash(req.body.wachtwoord, 10)
+                const user = new User({
+                    voornaam: req.body.voornaam,
+                    achternaam: req.body.achternaam,
+                    gebruikersnaam: req.body.gebruikersnaam,
+                    email: req.body.email,
+                    wachtwoord: passwordHash
+                })
+
+                await user.save();
+                // await db.collection('users').insertOne(user)
+                res.redirect('/aanmelden');
+                console.log("Account succesvol aangemaakt");
+            } catch (error) {
+                console.log(error);
+                console.log("Er is iets fout gegaan");
+                res.redirect('/registreren');
+
+            }
         }
-    }
-})
+    })
 
 
 /*app.get('/contact', async (req, res) => {
