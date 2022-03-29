@@ -22,6 +22,9 @@ const UserSchema = new mongoose.Schema ({
     wachtwoord: {
         type: String,
         required: true
+    },
+    countries: {
+        type: Array,
     }
 },
 {collection: 'users'})

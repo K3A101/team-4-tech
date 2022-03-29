@@ -1,0 +1,33 @@
+<h1>MATCH ME PAGE</h1>
+<div class="card">
+        <img src=<%= data.flag %> alt="vlag">
+
+        <div class="card-body">
+            <h2 class="country-name"  id="country-name"><%= data.name %></h2>
+            <p class="country-region"><strong>Regio:</strong> <span><%= data.region %></span></p>
+            <p><strong>Populatie: </strong><span><%= data.population %></span></p>
+            <p><strong>Hoofdstad:</strong><span><%= data.capital %></span></p>
+            <p class="country-language">
+                <strong>Taal:</strong><span><%= data.languages[0].name %></span></p>
+        </div>
+
+        <article id="weather-data"></article>
+
+        <section id="bereken_section">
+      <h1>Bereken de waarde van je geld voordat je vertrekt!</h1>
+      <div class="left_box">
+        <label for="number">Euro:</label>
+        <input type="number" name="" id="nummer">
+      </div>
+
+      <div class="right_box">
+        <label for="antwoord"><%= data.currencies[0].code %>:</label>
+        <input type="text" name="" id="antwoord" disabled>
+      </div>
+    </section>
+    <p id="currencyvalue"><%= data.currencies[0].code %></p>
+    
+</div>
+
+<script src="/scripts/weatherAPI.js"></script>
+  <script src="/scripts/currencyApi.js"></script>

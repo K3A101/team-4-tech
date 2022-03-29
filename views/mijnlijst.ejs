@@ -1,15 +1,13 @@
 <section>
-    <% allelanden.forEach(function(landen){ %>
+    <% user.countries.forEach(function(item){ %>
 
     <section>
-
-        <h2><%= landen.land %></h2>
-        <h3>Populatie: <%= landen.populatie %></h3>
-        <h3>Regio: <%= landen.regio %></h3>
-        <h3>Hoofdstad: <%= landen.capital %></h3>
-        <h3>Taal: <%= landen.language %></h3>
-
-        <form action="/delete/<%= landen._id %>" method="POST">
+        <h2><%= item.land %></h2>
+        <h3>Populatie: <%= item.populatie %></h3>
+        <h3>Regio: <%= item.regio %></h3>
+        <h3>Hoofdstad: <%= item.capital %></h3>
+        <h3>Taal: <%= item.language %></h3>
+        <form action="/delete/<%= item.alpha %>" method="POST">
             <button type="submit">Verwijder</button>
         </form>
     </section>
