@@ -54,18 +54,14 @@ const {
 } = require('express');
 initializePassport(
     passport,
-    async (username) => {
-            const userIsFound = await User.findOne({
-                email
-            })
-            return userIsFound
-        },
-        async (id) => {
-            const userIsFound = await User.findOne({
-                _id: id
-            });
-            return userIsFound;
-        }
+    async(email) => {
+        const userIsFound = await User.findOne({ email })
+        return userIsFound
+    },
+    async (id) => {
+        const userIsFound = await User.findOne({ _id: id });
+        return userIsFound;
+    }
 );
 
 app.use(bodyParser.json());
@@ -134,9 +130,7 @@ app.get('/country/:country', async (req, res) => {
 })
 
 app.get('/profile/', (req, res) => {
-    res.render('profile', {
-        voornaam: req.user.voornaam
-    });
+    res.render('profile', { email: req.user.email });
 });
 
 app.post('/aanmelden', passport.authenticate('local', (req, res) => {
