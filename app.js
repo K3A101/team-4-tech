@@ -5,13 +5,16 @@ const express = require('express')
 const expressLayouts = require('express-ejs-layouts');
 
 const app = express()
+const router = express.Router()
 
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('express-flash')
 const methodOverride = require('method-override')
 const {checkAuthenticated, checkNotAuthenticated} = require('./middleware/authentification');
-
+const bodyParser = require('body-parser')
+const { check, validationResult } = require('express-validator');
+const { validateUserSignUp, userValidation } = require( './middleware/user-validation')
 const port = process.env.PORT || 3000;
 
 const dotenv = require('dotenv').config();
@@ -34,6 +37,7 @@ const fetch = require('node-fetch');
 // Initieer passport (Gebruiker validatie)
 const initializePassport = require('./middleware/passport');
 const bcryptjs = require('bcryptjs');
+const { urlencoded } = require('express');
 initializePassport(
     passport,
     async(username) => {
@@ -45,6 +49,11 @@ initializePassport(
         return userIsFound;
     }
 );
+
+app.use(bodyParser.json());
+const bodyParserUrlEncoded = app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // let db = null;
 app.use(express.static('public'))
@@ -117,7 +126,9 @@ app.post('/aanmelden', passport.authenticate('local', (req, res) => {
     // failureFlash: true
 }))
 
-app.post('/registreren', async (req, res) => {
+app.post('/registreren', validateUserSignUp, userValidation,
+
+async (req, res) => {
     const userIsFound = await User.findOne({email: req.body.email, gebruikersnaam: req.body.gebruikersnaam})
 
     if(userIsFound) {
@@ -145,6 +156,8 @@ app.post('/registreren', async (req, res) => {
         }
     }
 })
+
+
 /*app.get('/contact', async (req, res) => {
     const ress = await fetch('https://restcountries.com/v2/all');
     const countries = await ress.json();
