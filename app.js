@@ -1,20 +1,29 @@
-//express zorgt ervoor dat je jouw site localhost kan hosten 
+//express zorgt ervoor dat je jouw site localhost kan hosten
 //en pagina's kan maken met app.get
 
-const express = require('express')
+const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
+const { urlencoded } = require('express');
 
-const app = express()
-const router = express.Router()
+const app = express();
+const router = express.Router();
 
 const session = require('express-session');
 const passport = require('passport');
-const flash = require('express-flash')
-const methodOverride = require('method-override')
-const {checkAuthenticated, checkNotAuthenticated} = require('./middleware/authentification');
-const bodyParser = require('body-parser')
+const flash = require('express-flash');
+const methodOverride = require('method-override');
+const {
+	checkAuthenticated,
+	checkNotAuthenticated,
+} = require('./middleware/authentification');
+
+const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
-const { validateUserSignUp, userValidation } = require( './middleware/user-validation')
+const {
+	validateUserSignUp,
+	userValidation,
+} = require('./middleware/user-validation');
+
 const port = process.env.PORT || 3000;
 
 const dotenv = require('dotenv').config();
@@ -22,14 +31,17 @@ const dotenv = require('dotenv').config();
 // const { ObjectId } = require('mongodb');
 
 // connect mongoose
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 // const myId = mongoose.Types.ObjectId;
 const User = require('./models/User');
 
 const dbURI = process.env.DB_URI;
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true})
-    .then((result) => console.log('connected to database'))
-    .catch((err) => console.log(err))
+mongoose
+	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then((result) =>
+		console.log('connected to database')
+	) /* Console.log om te checken of er een succesvolle connectie met de database is */
+	.catch((err) => console.log(err));
 
 const fetch = require('node-fetch');
 // const { checkNotAuthenticated } = require('./middleware/authentification');
@@ -37,35 +49,39 @@ const fetch = require('node-fetch');
 // Initieer passport (Gebruiker validatie)
 const initializePassport = require('./middleware/passport');
 const bcryptjs = require('bcryptjs');
-const { urlencoded } = require('express');
 initializePassport(
-    passport,
-    async(email) => {
-        const userIsFound = await User.findOne({ email })
-        return userIsFound
-    },
-    async (id) => {
-        const userIsFound = await User.findOne({ _id: id });
-        return userIsFound;
-    }
+	passport,
+	async (email) => {
+		const userIsFound = await User.findOne({ email });
+		return userIsFound;
+	},
+	async (id) => {
+		const userIsFound = await User.findOne({ _id: id });
+		return userIsFound;
+	}
 );
 
 app.use(bodyParser.json());
-const bodyParserUrlEncoded = app.use(bodyParser.urlencoded({
-    extended: true
-}));
+const bodyParserUrlEncoded = app.use(
+	bodyParser.urlencoded({
+		extended: true,
+	})
+);
 
 // let db = null;
-app.use(express.static('public'))
-app.use(express.urlencoded({
-    extended: true
-}))
+app.use(express.static('public'));
+app.use(
+	express.urlencoded({
+		extended: true,
+	})
+);
 app.use(flash());
-app.use(session({
-    secret: process.env.SESSION_SECRET_CODE,
-    resave: false,
-    saveUninitialized: false,
-})
+app.use(
+	session({
+		secret: process.env.SESSION_SECRET_CODE,
+		resave: false,
+		saveUninitialized: false,
+	})
 );
 
 app.use(passport.initialize());
@@ -77,87 +93,87 @@ app.use(expressLayouts);
 app.set('layout', './partials/layout');
 app.set('view engine', 'ejs');
 
-
 /* routes */
 app.get('/', async (req, res) => {
-    const ress = await fetch('https://restcountries.com/v2/all');
-    const countries = await ress.json();
+	const ress = await fetch('https://restcountries.com/v2/all');
+	const countries = await ress.json();
 
-    res.render('home', {
-        countries: countries
-    });
-})
-
+	res.render('home', {
+		countries: countries,
+	});
+});
 
 // Aanmelden formulier
 app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
-    res.render('aanmelden')
+	res.render('aanmelden');
 });
 
 // Registreren formulier
 app.get('/registreren', (req, res) => {
-    res.render('registreren')
+	res.render('registreren');
 });
 
 // introduction page
+
 app.get('/introduction', (req, res) => {
-    res.render('introduction');
-})
-
-app.get('/country/:country', async (req, res) => {
-    const ress = await fetch(`https://restcountries.com/v2/alpha/${req.params.country}`);
-    const countryData = await ress.json();
-
-    res.render('countryDetail', {
-        data: countryData
-    });
-})
-
-app.get('/profile/', (req, res) => {
-    res.render('profile', { email: req.user.email });
+	res.render('introduction');
 });
 
-app.post('/aanmelden', passport.authenticate('local', (req, res) => {
-    console.log(successRedirect);
-    console.log(failureRedirect);
+app.get('/country/:country', async (req, res) => {
+	const ress = await fetch(
+		`https://restcountries.com/v2/alpha/${req.params.country}`
+	);
+	const countryData = await ress.json();
 
-    // successRedirect: '/profile',
-    // failureRedirect: '/registreren',
-    // failureFlash: true
-}))
+	res.render('countryDetail', {
+		data: countryData,
+	});
+});
 
-app.post('/registreren', validateUserSignUp, userValidation,
+app.get('/profile/', (req, res) => {
+	res.render('profile', { email: req.user.email });
+});
 
-async (req, res) => {
-    const userIsFound = await User.findOne({email: req.body.email, gebruikersnaam: req.body.gebruikersnaam})
+app.post(
+	'/aanmelden',
+	passport.authenticate('local', {
+		successRedirect: '/profile',
+		failureRedirect: '/registreren',
+		failureFlash: true,
+	})
+);
 
-    if(userIsFound) {
-        req.flash('error', 'Er bestaat al een account met dit emailadres.')
-        res.redirect('/registreren');
-    } else {
-        try {
-            const passwordHash = await bcryptjs.hash(req.body.wachtwoord, 10)
-            const user = new User({
-                voornaam: req.body.voornaam,
-                achternaam: req.body.achternaam,
-                gebruikersnaam: req.body.gebruikersnaam,
-                email: req.body.email,
-                wachtwoord: passwordHash
-            })
-            
-            await user.save();
-            // await db.collection('users').insertOne(user)
-            res.redirect('/aanmelden');
-            console.log("Account succesvol aangemaakt");
-        } catch (error) {
-            console.log(error);
-            console.log("Er is iets fout gegaan");
-            res.redirect('/registreren');
-        }
-    }
-})
+app.post('/registreren', async (req, res) => {
+	const userIsFound = await User.findOne({
+		email: req.body.email,
+		gebruikersnaam: req.body.gebruikersnaam,
+	});
 
+	if (userIsFound) {
+		req.flash('error', 'Er bestaat al een account met dit emailadres.');
+		res.redirect('/registreren');
+	} else {
+		try {
+			const passwordHash = await bcryptjs.hash(req.body.wachtwoord, 10);
+			const user = new User({
+				voornaam: req.body.voornaam,
+				achternaam: req.body.achternaam,
+				gebruikersnaam: req.body.gebruikersnaam,
+				email: req.body.email,
+				wachtwoord: passwordHash,
+			});
 
+			await user.save();
+			// await db.collection('users').insertOne(user)
+			res.redirect('/aanmelden');
+			console.log('Account succesvol aangemaakt');
+		} catch (error) {
+			console.log(error);
+			console.log('Er is iets fout gegaan');
+			res.redirect('/registreren');
+		}
+	}
+});
 /*app.get('/contact', async (req, res) => {
     const ress = await fetch('https://restcountries.com/v2/all');
     const countries = await ress.json();
@@ -169,22 +185,20 @@ async (req, res) => {
 
 })*/
 app.get('/header', (req, res) => {
-    res.render('header');
-})
+	res.render('header');
+});
 
 // mijn lijst, rendert een title en allelanden dus landen.land etc die later worden ingesteld
 app.get('/mijnlijst', async (req, res) => {
-    const allelanden = await db.collection('landen').find().toArray();
-    const title = "Mijn landen";
-    res.render('mijnlijst', {
-        title,
-        allelanden
-    });
-})
+	const allelanden = await db.collection('landen').find().toArray();
+	const title = 'Mijn landen';
+	res.render('mijnlijst', {
+		title,
+		allelanden,
+	});
+});
 app.get('*', function (req, res) {
-
-    res.status('CANNOT FIND PAGE ERROR 404 (oepsie)', 404);
-
+	res.status('CANNOT FIND PAGE ERROR 404 (oepsie)', 404);
 });
 
 /*****************************************************
@@ -208,10 +222,9 @@ app.get('*', function (req, res) {
 /*webserver starten*/
 
 app.listen(port, () => {
-
-    console.log(`Example app listening on port ${port}`)
-    // connectDB().then(() => console.log("We have a connection to Mongo!"));
-})
+	console.log(`Example app listening on port ${port}`);
+	// connectDB().then(() => console.log("We have a connection to Mongo!"));
+});
 
 //database inhoud sturen en ophalen: hulp van Sonja
 /*
@@ -243,7 +256,6 @@ app.post("/save-countries", (req, res) => {
 //     await db.collection('landen').insertOne(form);
 
 //     const allelanden = await db.collection('landen').find().toArray();
-
 
 //     // render de gestuurde data naar pagina
 
