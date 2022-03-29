@@ -9,6 +9,7 @@ const app = express();
 const router = express.Router();
 
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const flash = require('express-flash');
 const methodOverride = require('method-override');
@@ -79,8 +80,8 @@ app.use(flash());
 app.use(
 	session({
 		secret: process.env.SESSION_SECRET_CODE,
-		resave: false,
-		saveUninitialized: false,
+		resave: true,
+		saveUninitialized: true,
 	})
 );
 
@@ -97,26 +98,37 @@ app.set('view engine', 'ejs');
 app.get('/', async (req, res) => {
 	const ress = await fetch('https://restcountries.com/v2/all');
 	const countries = await ress.json();
+	const loggedInUser = req.session.user ? req.session.user : null;
 
 	res.render('home', {
 		countries: countries,
+		user: loggedInUser,
 	});
 });
 
 // Aanmelden formulier
 app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
-	res.render('aanmelden');
+	const loggedInUser = req.session.user ? req.session.user : null;
+	if (loggedInUser) {
+		res.render('profile', { user: loggedInUser });
+	} else {
+		res.render('aanmelden', { user: loggedInUser });
+	}
 });
 
 // Registreren formulier
 app.get('/registreren', (req, res) => {
-	res.render('registreren');
+	const loggedInUser = req.session.user ? req.session.user : null;
+
+	res.render('registreren', { user: loggedInUser });
 });
 
 // introduction page
 
 app.get('/introduction', (req, res) => {
-	res.render('introduction');
+	const loggedInUser = req.session.user ? req.session.user : null;
+
+	res.render('introduction', { user: loggedInUser });
 });
 
 app.get('/country/:country', async (req, res) => {
@@ -124,14 +136,28 @@ app.get('/country/:country', async (req, res) => {
 		`https://restcountries.com/v2/alpha/${req.params.country}`
 	);
 	const countryData = await ress.json();
+	const loggedInUser = req.session.user ? req.session.user : null;
 
 	res.render('countryDetail', {
 		data: countryData,
+		user: loggedInUser,
 	});
 });
 
 app.get('/profile/', (req, res) => {
-	res.render('profile', { email: req.user.email });
+	req.session.user = req.user;
+	req.session.save();
+	const loggedInUser = req.session.user ? req.session.user : null;
+
+	console.log('test', req.session.user);
+
+	if (loggedInUser) {
+		res.render('profile', {
+			user: loggedInUser,
+		});
+	} else {
+		res.redirect('/aanmelden');
+	}
 });
 
 app.post(
@@ -142,6 +168,12 @@ app.post(
 		failureFlash: true,
 	})
 );
+
+app.get('/logout', (req, res) => {
+	const loggedInUser = req.session.user ? req.session.user : null;
+	req.session.destroy();
+	res.redirect('/aanmelden');
+});
 
 app.post('/registreren', async (req, res) => {
 	const userIsFound = await User.findOne({
@@ -184,9 +216,6 @@ app.post('/registreren', async (req, res) => {
     });
 
 })*/
-app.get('/header', (req, res) => {
-	res.render('header');
-});
 
 // mijn lijst, rendert een title en allelanden dus landen.land etc die later worden ingesteld
 app.get('/mijnlijst', async (req, res) => {

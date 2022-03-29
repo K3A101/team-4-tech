@@ -1,20 +1,25 @@
 <header>
-    <nav>
-        <a href="#" class="toggle-button">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </a>
-        <div class="links">
-            <ul>
-                <li><a href="/introduction">Home</a></li>
-                <li><a href="/">Landen</a></li>
-            </ul>
-            <ul>
-                <li><a href="/aanmelden">Aanmelden</a></li>
-                <li><a href="/profile/:name">Profiel</a></li>
-                <li><a href="mijnlijst">Mijn lijst</a></li>
-            </ul>
-        </div>
-    </nav>
+	<nav>
+		<a href="#" class="toggle-button">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</a>
+		<div class="links">
+			<ul>
+				<li><a href="/introduction">Home</a></li>
+				<li><a href="/">Landen</a></li>
+			</ul>
+			<ul>
+				<% if (!user) { %>
+				<li><a href="/aanmelden">Inloggen</a></li>
+				<% } %> <% if (user) { %>
+				<li><a href="/profile">Profiel</a></li>
+				<li><a href="/logout">Uitloggen</a></li>
+				<% } %>
+
+				<li><a href="mijnlijst">Mijn lijst</a></li>
+			</ul>
+		</div>
+	</nav>
 </header>
