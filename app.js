@@ -40,7 +40,7 @@ const bcryptjs = require('bcryptjs');
 const { urlencoded } = require('express');
 initializePassport(
     passport,
-    async(username) => {
+    async(email) => {
         const userIsFound = await User.findOne({ email })
         return userIsFound
     },
@@ -114,7 +114,7 @@ app.get('/country/:country', async (req, res) => {
 })
 
 app.get('/profile/', (req, res) => {
-    res.render('profile', { voornaam: req.user.voornaam });
+    res.render('profile', { email: req.user.email });
 });
 
 app.post('/aanmelden', passport.authenticate('local', (req, res) => {
