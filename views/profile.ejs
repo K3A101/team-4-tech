@@ -1,34 +1,33 @@
+<h1 id="profiel-titel">
+	Profiel van <%= user.voornaam %> <%= user.achternaam %>
+</h1>
+<main class="profielpagina">
+	<figure class="profielfoto">
+		<img src="#" alt="Gebruikersprofiel" />
+	</figure>
 
+	<section class="profiel-gegevens">
+		<h2>Naam</h2>
+		<ul>
+			<li><%= user.voornaam %></li>
+			<li><%= user.achternaam %></li>
+		</ul>
+	</section>
 
-    <h1 id="profiel-titel">Profiel van <%= email %></h1>
-    <main class="profielpagina">
-        <figure class="profielfoto">
-            <img src="#" alt="Gebruikersprofiel">
-        </figure>
+	<section class="profiel-gegevens">
+		<h2>Gebruikersnaam</h2>
+		<p><%= user.gebruikersnaam %></p>
+	</section>
 
-        <section class="profiel-gegevens">
-            <h2>Naam</h2>
-            <ul>
-                <li>Voornaam</li>
-                <li>Achternaam</li>
-            </ul>
-        </section>
+	<section class="profiel-gegevens">
+		<h2>Email</h2>
+		<p><%= user.email %></p>
+	</section>
 
-        <section class="profiel-gegevens">
-            <h2>Gebruikersnaam</h2>
-            <p>Gebruikersnaam</p>
-        </section>
+	<section class="profiel-gegevens"></section>
 
-        <section class="profiel-gegevens">
-            <h2>Email</h2>
-            <p>Voorbeeld@email.com</p>
-        </section>
+	<!-- Link naar mijn lijst pagina  -->
+	<a class="lijst-link" href="/mijnlijst">Mijn Lijst</a>
 
-        <section class="profiel-gegevens">
-           
-        </section>
-
-        <!-- Link naar mijn lijst pagina  -->
-        <a class="lijst-link" href="/mijnlijst">Mijn Lijst</a>
-
-<script src="/scripts/script.js"></script>
+	<script src="/scripts/script.js"></script>
+</main>
