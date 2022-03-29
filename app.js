@@ -261,9 +261,6 @@ app.get('/match-me', async (req, res) => {
 
 	const randomInt = Math.floor(Math.random() * countries.length) + 1;
 
-	console.log(countries[randomInt]);
-	// Math.floor(Math.random() * countries.length) + 1;
-
 	if (loggedInUser) {
 		const user = await User.findOne({ email: loggedInUser.email });
 		res.render('match-me', { user: user, data: countries[randomInt] });
