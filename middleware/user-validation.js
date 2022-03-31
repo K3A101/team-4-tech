@@ -19,15 +19,15 @@ exports.validateUserSignUp = [
 
 exports.userValidation = (req, res, next) => {
     const result = validationResult(req).array();
+	const loggedInUser = req.session.user ? req.session.user : null;
 
-   if(!result.length) return next();
 
-   const error = result[0].msg;
-   res.json({success: false, message: error})
-    // if (!errors.isEmpty()) {
-    //     return res.status(400).json({
-    //         errors: errors.array()
-    //     });
-    // }
-    console.log(error);
+    if (result.length > 0) {
+        res.render('registreren', {
+            err: result,
+		    user: loggedInUser,
+        });
+    } else {
+        return
+    }
 }

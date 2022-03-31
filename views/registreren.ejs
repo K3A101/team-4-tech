@@ -1,8 +1,8 @@
-
 <section class="register-container">
     <section>
         <h2>Registreren</h2>
-        <form action="/registreren" method="post">
+        <div id="error"></div>
+        <form action="/registreren" method="post" id="form">
 
             <!-- Volledige naam invoeren -->
             <fieldset>
@@ -31,7 +31,7 @@
                 <input type="password" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord">
             </fieldset>
 
-                        
+
 
             <fieldset>
                 <!-- Gaat naar het aanmeld formulier pagina om in te loggen -->
@@ -48,3 +48,13 @@
     <section class="image-container">
     </section>
 </section>
+
+<% if(err) { %>
+<article class="toaster">
+    <% err.forEach((item) => { %>
+    <p>
+         <%= item.msg %>
+    </p>
+    <% }) %>
+</article>
+<% } %>

@@ -119,8 +119,9 @@ app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
 // Registreren formulier
 app.get('/registreren', (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
+	const err = null;
 
-	res.render('registreren', { user: loggedInUser });
+	res.render('registreren', { user: loggedInUser, err: err });
 });
 
 // introduction page
@@ -175,7 +176,7 @@ app.get('/logout', (req, res) => {
 	res.redirect('/aanmelden');
 });
 
-app.post('/registreren', async (req, res) => {
+app.post('/registreren', validateUserSignUp, userValidation, async (req, res) => {
 	const userIsFound = await User.findOne({
 		email: req.body.email,
 		gebruikersnaam: req.body.gebruikersnaam,
