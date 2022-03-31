@@ -1,51 +1,37 @@
-//express zorgt ervoor dat je jouw site localhost kan hosten
-//en pagina's kan maken met app.get
-
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const { urlencoded } = require('express');
-
 const app = express();
 const router = express.Router();
+const {
+	checkAuthenticated,
+	checkNotAuthenticated,
+} = require('./middleware/authentification');
+const {
+	validateUserSignUp,
+	userValidation,
+} = require('./middleware/user-validation');
+const port = process.env.PORT || 3000;
+const dotenv = require('dotenv').config();
 
+// dependecies
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const flash = require('express-flash');
 const methodOverride = require('method-override');
-const {
-	checkAuthenticated,
-	checkNotAuthenticated,
-} = require('./middleware/authentification');
-
+const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
-const {
-	validateUserSignUp,
-	userValidation,
-} = require('./middleware/user-validation');
-
-const port = process.env.PORT || 3000;
-
-const dotenv = require('dotenv').config();
-// const { MongoClient } = require('mongodb');
-// const { ObjectId } = require('mongodb');
 
 // connect mongoose
 const mongoose = require('mongoose');
-// const myId = mongoose.Types.ObjectId;
 const User = require('./models/User');
-
 const dbURI = process.env.DB_URI;
 mongoose
 	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-	.then((result) =>
-		console.log('connected to database')
-	) /* Console.log om te checken of er een succesvolle connectie met de database is */
+	.then((result) => console.log('connected to database'))
 	.catch((err) => console.log(err));
-
-const fetch = require('node-fetch');
-// const { checkNotAuthenticated } = require('./middleware/authentification');
 
 // Initieer passport (Gebruiker validatie)
 const initializePassport = require('./middleware/passport');
@@ -69,13 +55,13 @@ const bodyParserUrlEncoded = app.use(
 	})
 );
 
-// let db = null;
 app.use(express.static('public'));
 app.use(
 	express.urlencoded({
 		extended: true,
 	})
 );
+
 app.use(flash());
 app.use(
 	session({
@@ -95,15 +81,9 @@ app.set('layout', './partials/layout');
 app.set('view engine', 'ejs');
 
 /* routes */
+// Home route
 app.get('/', async (req, res) => {
-	const data = await fetch('https://restcountries.com/v2/all');
-	const countries = await data.json();
-	const loggedInUser = req.session.user ? req.session.user : null;
-
-	res.render('home', {
-		countries: countries,
-		user: loggedInUser,
-	});
+	homePage(req, res);
 });
 
 // Aanmelden formulier
@@ -125,14 +105,96 @@ app.get('/registreren', (req, res) => {
 });
 
 // introduction page
-
 app.get('/introduction', (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 
 	res.render('introduction', { user: loggedInUser });
 });
 
+// Detail page of each country
 app.get('/country/:country', async (req, res) => {
+	countryDetailPage(req, res);
+});
+
+// profile page
+app.get('/profile', (req, res) => {
+	profilePage(req, res);
+});
+
+// route for sing-in form
+app.post(
+	'/aanmelden',
+	passport.authenticate('local', {
+		successRedirect: '/profile',
+		failureRedirect: '/registreren',
+		failureFlash: true,
+	})
+);
+
+// route for singing out
+app.get('/logout', (req, res) => {
+	const loggedInUser = req.session.user ? req.session.user : null;
+	req.session.destroy();
+	res.redirect('/aanmelden');
+});
+
+// route for register a user
+app.post(
+	'/registreren',
+	validateUserSignUp,
+	userValidation,
+	async (req, res) => {
+		AddNewUserForm(req, res);
+	}
+);
+
+// Lijst met de favoriete landen van een user
+app.get('/mijnlijst', async (req, res) => {
+	MyListPage(req, res);
+});
+
+// Voeg iets toe aan mijn-lijst
+app.post('/mijnlijst/add', async (req, res) => {
+	addCountryToFavorites(req, res);
+});
+
+// Remove a favorite country from favorites
+app.post('/mijn-lijst/delete/:id', async (req, res) => {
+	RemoveCountryFromList(req, res);
+});
+
+// match me with random country
+app.get('/match-me', async (req, res) => {
+	MatchMePage(req, res);
+});
+
+// Add a matched country to favorites
+app.post('/match-me/add', async (req, res) => {
+	AddCountryFromMatchMePage(req, res);
+});
+
+// 404 page
+app.get('*', function (req, res) {
+	res.status('CANNOT FIND PAGE ERROR 404 (oepsie)', 404);
+});
+
+// Start server
+app.listen(port, () => {
+	console.log(`Example app listening on port ${port}`);
+});
+
+// Pages
+const homePage = async (req, res) => {
+	const data = await fetch('https://restcountries.com/v2/all');
+	const countries = await data.json();
+	const loggedInUser = req.session.user ? req.session.user : null;
+
+	res.render('home', {
+		countries: countries,
+		user: loggedInUser,
+	});
+};
+const countryDetailPage = async (req, res) => {
 	const ress = await fetch(
 		`https://restcountries.com/v2/alpha/${req.params.country}`
 	);
@@ -143,9 +205,8 @@ app.get('/country/:country', async (req, res) => {
 		data: countryData,
 		user: loggedInUser,
 	});
-});
-
-app.get('/profile/', (req, res) => {
+};
+const profilePage = (req, res) => {
 	req.session.user = req.user;
 	req.session.save();
 	const loggedInUser = req.session.user ? req.session.user : null;
@@ -157,24 +218,34 @@ app.get('/profile/', (req, res) => {
 	} else {
 		res.redirect('/aanmelden');
 	}
-});
-
-app.post(
-	'/aanmelden',
-	passport.authenticate('local', {
-		successRedirect: '/profile',
-		failureRedirect: '/registreren',
-		failureFlash: true,
-	})
-);
-
-app.get('/logout', (req, res) => {
+};
+const MatchMePage = async (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
-	req.session.destroy();
-	res.redirect('/aanmelden');
-});
+	const data = await fetch('https://restcountries.com/v2/all');
+	const countries = await data.json();
 
-app.post('/registreren', validateUserSignUp, userValidation, async (req, res) => {
+	const randomInt = Math.floor(Math.random() * countries.length) + 1;
+
+	if (loggedInUser) {
+		const user = await User.findOne({ email: loggedInUser.email });
+		res.render('match-me', { user: user, data: countries[randomInt] });
+	} else {
+		res.redirect('/aanmelden');
+	}
+};
+const MyListPage = async (req, res) => {
+	const loggedInUser = req.session.user ? req.session.user : null;
+
+	if (loggedInUser) {
+		const user = await User.findOne({ email: loggedInUser.email });
+		res.render('mijnlijst', { user: user });
+	} else {
+		res.redirect('/aanmelden');
+	}
+};
+
+// Page Functions
+const AddNewUserForm = async (req, res) => {
 	const userIsFound = await User.findOne({
 		email: req.body.email,
 		gebruikersnaam: req.body.gebruikersnaam,
@@ -195,30 +266,16 @@ app.post('/registreren', validateUserSignUp, userValidation, async (req, res) =>
 			});
 
 			await user.save();
-			// await db.collection('users').insertOne(user)
-			res.redirect('/aanmelden');
+			await res.redirect('/aanmelden');
 			console.log('Account succesvol aangemaakt');
 		} catch (error) {
 			console.log(error);
 			console.log('Er is iets fout gegaan');
-			res.redirect('/registreren');
+			await res.redirect('/registreren');
 		}
 	}
-});
-
-// mijn lijst, rendert een title en allelanden dus landen.land etc die later worden ingesteld
-app.get('/mijnlijst', async (req, res) => {
-	const loggedInUser = req.session.user ? req.session.user : null;
-
-	if (loggedInUser) {
-		const user = await User.findOne({ email: loggedInUser.email });
-		res.render('mijnlijst', { user: user });
-	} else {
-		res.redirect('/aanmelden');
-	}
-});
-
-app.post('/mijnlijst', async (req, res) => {
+};
+const addCountryToFavorites = async (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 
 	let form = {
@@ -233,10 +290,8 @@ app.post('/mijnlijst', async (req, res) => {
 	const user = await User.findOne({ email: loggedInUser.email });
 	user.countries.push(form);
 	await user.save();
-});
-
-// delete functie
-app.post('/delete/:id', async (req, res) => {
+};
+const RemoveCountryFromList = async (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 
 	const test = await User.findOneAndUpdate(
@@ -246,9 +301,8 @@ app.post('/delete/:id', async (req, res) => {
 	);
 
 	res.redirect('/mijnlijst');
-});
-
-app.post('/match-me/add', async (req, res) => {
+};
+const AddCountryFromMatchMePage = async (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 
 	let form = {
@@ -265,57 +319,4 @@ app.post('/match-me/add', async (req, res) => {
 	await user.save();
 
 	res.redirect('/match-me');
-});
-
-// match me with random country
-app.get('/match-me', async (req, res) => {
-	const loggedInUser = req.session.user ? req.session.user : null;
-	const data = await fetch('https://restcountries.com/v2/all');
-	const countries = await data.json();
-
-	const randomInt = Math.floor(Math.random() * countries.length) + 1;
-
-	if (loggedInUser) {
-		const user = await User.findOne({ email: loggedInUser.email });
-		res.render('match-me', { user: user, data: countries[randomInt] });
-	} else {
-		res.redirect('/aanmelden');
-	}
-});
-
-app.get('*', function (req, res) {
-	res.status('CANNOT FIND PAGE ERROR 404 (oepsie)', 404);
-});
-
-/*****************************************************
- * Connect to database
- ****************************************************/
-// Sonja haar uitleg
-// async function connectDB() {
-//     const uri = process.env.DB_URI;
-//     const client = new MongoClient(uri, {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true,
-//     });
-//     try {
-//         await client.connect();
-//         db = client.db(process.env.DB_NAME);
-//     } catch (error) {
-//         throw error;
-//     }
-// }
-
-/*webserver starten*/
-
-app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`);
-	// connectDB().then(() => console.log("We have a connection to Mongo!"));
-});
-
-//database inhoud sturen en ophalen: hulp van Sonja
-/*
-app.post("/save-countries", (req, res) => {
-    console.log(req.body)
-
-    res.redirect("/mijnlijst")
-})*/
+};
