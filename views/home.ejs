@@ -45,7 +45,7 @@
                 <% countries.forEach((country) => { %>
                 <div class="card">
                     <a href="/country/<%= country.alpha3Code %> ">
-                        <img src=<%= country.flag %> alt="vlag">
+                        <img class="flag" src=<%= country.flag %> alt="vlag">
 
                         <div class="card-body">
                             <h2 class="country-name"><%= country.name %></h2>
