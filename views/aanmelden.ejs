@@ -1,41 +1,33 @@
-
 <section class="register-container">
-    <section>
-        <h2>Aanmelden</h2>
-        <form action="/aanmelden" method="post">
+	<section>
+		<h2>Aanmelden</h2>
+		<form action="/aanmelden" method="post">
+			<!-- Gebruikersnaam of email invoeren -->
+			<fieldset>
+				<label for="email">Email</label>
+				<input
+					type="text"
+					name="email"
+					id="email"
+					placeholder="Gebruikersnaam of wachtwoord"
+				/>
+			</fieldset>
 
-            <!-- Gebruikersnaam of email invoeren -->
-            <fieldset>
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email" placeholder="Gebruikersnaam of wachtwoord">
-            </fieldset>
+			<!-- Wachtwoord invoeren -->
+			<fieldset>
+				<label for="wachtwoord">Wachtwoord</label>
+				<input type="password" name="wachtwoord" placeholder="Wachtwoord" />
+			</fieldset>
 
-            <!-- Wachtwoord invoeren -->
-            <fieldset>
-                <label for="wachtwoord">Wachtwoord</label>
-                <input type="password" name="wachtwoord" placeholder="Wachtwoord">
-            </fieldset>
+			<fieldset>
+				<!-- Gaat naar het registreren formulier pagina -->
+				<a href="/registreren">Registreren</a>
 
-            <!-- Inlog gegevens opslaan -->
-            <fieldset>
+				<!-- Wordt ingelogd -->
+				<button type="submit">Aanmelden</button>
+			</fieldset>
+		</form>
+	</section>
 
-                <label for="herrineren">
-                    <input type="checkbox" name="herriner" id="herrineren"> Herinner me</label>
-                <a href="#"> Wachtwoord vergeten</a>
-            </fieldset>
-            <fieldset>
-                <!-- Gaat naar het registreren formulier pagina -->
-                <a href="/registreren">Registreren</a>
-
-                <!-- Wordt ingelogd -->
-                <button type="submit">Aanmelden</button>
-            </fieldset>
-
-
-        </form>
-    </section>
-
-    <section class="image-container">
-
-    </section>
+	<section class="image-container"></section>
 </section>
