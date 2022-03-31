@@ -96,8 +96,8 @@ app.set('view engine', 'ejs');
 
 /* routes */
 app.get('/', async (req, res) => {
-	const ress = await fetch('https://restcountries.com/v2/all');
-	const countries = await ress.json();
+	const data = await fetch('https://restcountries.com/v2/all');
+	const countries = await data.json();
 	const loggedInUser = req.session.user ? req.session.user : null;
 
 	res.render('home', {
@@ -149,8 +149,6 @@ app.get('/profile/', (req, res) => {
 	req.session.user = req.user;
 	req.session.save();
 	const loggedInUser = req.session.user ? req.session.user : null;
-
-	console.log('test', req.session.user);
 
 	if (loggedInUser) {
 		res.render('profile', {
@@ -220,13 +218,58 @@ app.post('/registreren', validateUserSignUp, userValidation, async (req, res) =>
 
 // mijn lijst, rendert een title en allelanden dus landen.land etc die later worden ingesteld
 app.get('/mijnlijst', async (req, res) => {
-	const allelanden = await db.collection('landen').find().toArray();
-	const title = 'Mijn landen';
-	res.render('mijnlijst', {
-		title,
-		allelanden,
-	});
+	const loggedInUser = req.session.user ? req.session.user : null;
+	const user = await User.findOne({ email: loggedInUser.email });
+
+	res.render('mijnlijst', { user: user });
 });
+
+app.post('/mijnlijst', async (req, res) => {
+	const loggedInUser = req.session.user ? req.session.user : null;
+
+	let form = {
+		land: req.body.land,
+		populatie: req.body.populatie,
+		regio: req.body.regio,
+		capital: req.body.capital,
+		language: req.body.language,
+		alpha: req.body.alpha,
+	};
+
+	const user = await User.findOne({ email: loggedInUser.email });
+	user.countries.push(form);
+	await user.save();
+});
+
+// delete functie
+app.post('/delete/:id', async (req, res) => {
+	const loggedInUser = req.session.user ? req.session.user : null;
+
+	const test = await User.findOneAndUpdate(
+		{ email: loggedInUser.email },
+		{ $pull: { countries: { alpha: req.params.id } } },
+		{ new: true }
+	);
+
+	res.redirect('/mijnlijst');
+});
+
+// match me with random country
+app.get('/match-me', async (req, res) => {
+	const loggedInUser = req.session.user ? req.session.user : null;
+	const data = await fetch('https://restcountries.com/v2/all');
+	const countries = await data.json();
+
+	const randomInt = Math.floor(Math.random() * countries.length) + 1;
+
+	if (loggedInUser) {
+		const user = await User.findOne({ email: loggedInUser.email });
+		res.render('match-me', { user: user, data: countries[randomInt] });
+	} else {
+		res.redirect('/aanmelden');
+	}
+});
+
 app.get('*', function (req, res) {
 	res.status('CANNOT FIND PAGE ERROR 404 (oepsie)', 404);
 });
@@ -263,49 +306,3 @@ app.post("/save-countries", (req, res) => {
 
     res.redirect("/mijnlijst")
 })*/
-
-// app.post('/mijnlijst', async (req, res) => {
-
-//     // landinfo toevoegen via het id die in script.js is aangegeven in het aanmaken van formulier
-
-//     let form = {
-
-//         land: req.body.land,
-
-//         populatie: req.body.populatie,
-
-//         regio: req.body.regio,
-
-//         capital: req.body.capital,
-
-//         language: req.body.language
-//     };
-
-//     // connection
-//     // stuurt het als een form
-//     await db.collection('landen').insertOne(form);
-
-//     const allelanden = await db.collection('landen').find().toArray();
-
-//     // render de gestuurde data naar pagina
-
-//     const title = "Mijn landen";
-
-//     res.render('mijnlijst', {
-//         title,
-//         allelanden
-//     });
-
-// });
-
-// delete functie
-// app.post("/delete/:id",
-//     async (req, res) => {
-
-//         db.collection('landen').deleteOne({
-//             _id: ObjectId(req.params.id)
-//         })
-//         res.redirect("/mijnlijst");
-//     });
-
-//Sam slotenmaker vertelde over ObjectId(req.params.id) ipv dat ik _id: MyId moest gebruiken
