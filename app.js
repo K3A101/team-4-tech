@@ -205,23 +205,17 @@ app.post('/registreren', validateUserSignUp, userValidation, async (req, res) =>
 		}
 	}
 });
-/*app.get('/contact', async (req, res) => {
-    const ress = await fetch('https://restcountries.com/v2/all');
-    const countries = await ress.json();
-
-    res.render('contact', {
-        countries: countries
-
-    });
-
-})*/
 
 // mijn lijst, rendert een title en allelanden dus landen.land etc die later worden ingesteld
 app.get('/mijnlijst', async (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
-	const user = await User.findOne({ email: loggedInUser.email });
 
-	res.render('mijnlijst', { user: user });
+	if (loggedInUser) {
+		const user = await User.findOne({ email: loggedInUser.email });
+		res.render('mijnlijst', { user: user });
+	} else {
+		res.redirect('/aanmelden');
+	}
 });
 
 app.post('/mijnlijst', async (req, res) => {
@@ -252,6 +246,25 @@ app.post('/delete/:id', async (req, res) => {
 	);
 
 	res.redirect('/mijnlijst');
+});
+
+app.post('/match-me/add', async (req, res) => {
+	const loggedInUser = req.session.user ? req.session.user : null;
+
+	let form = {
+		land: req.body.land,
+		populatie: req.body.populatie,
+		regio: req.body.regio,
+		capital: req.body.capital,
+		language: req.body.language,
+		alpha: req.body.alpha,
+	};
+
+	const user = await User.findOne({ email: loggedInUser.email });
+	user.countries.push(form);
+	await user.save();
+
+	res.redirect('/match-me');
 });
 
 // match me with random country

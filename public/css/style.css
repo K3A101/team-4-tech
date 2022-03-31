@@ -674,3 +674,16 @@ input::placeholder {
     margin-bottom: 0.1rem;
     list-style: disc;
 }
+
+
+/* Match me */
+
+.card-button-container form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card.cursor-normal {
+    cursor: auto;
+}
