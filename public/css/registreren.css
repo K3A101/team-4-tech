@@ -11,7 +11,7 @@
 .register-container .image-container {
     height: 100%;
     width: 100%;
-	background-image: url('../images/holliday.jpg');
+    background-image: url('/images/holliday.jpg');
     background-size: cover;
 }
 

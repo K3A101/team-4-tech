@@ -1,92 +1,97 @@
-const strapi_uri = "http://localhost:1337"
+const strapiContainer = document.getElementById("introduction-page");
+strapiContainer && getStrapi()
 
-const fetchIntroData = async () => {
-  const url = `${strapi_uri}/api/intro?populate=header,practicalImage`;
+function getStrapi() {
+  const strapi_uri = "http://localhost:1337"
 
-  const response = await fetch(url);
-  const data = await response.json();
+  const fetchIntroData = async () => {
+    const url = `${strapi_uri}/api/intro?populate=header,practicalImage`;
 
-  fillIntroData(data.data.attributes);
+    const response = await fetch(url);
+    const data = await response.json();
+
+    fillIntroData(data.data.attributes);
+  }
+
+  const fetchDevelopersData = async () => {
+    const url = `${strapi_uri}/api/developers?populate=image`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    fillDeveloperData(data.data);
+  }
+
+  const fetchFeaturesData = async () => {
+    const url = `${strapi_uri}/api/features`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    fillFeaturesData(data.data);
+  }
+
+  const fillIntroData = (data) => {
+    const practicalInformationText = document.getElementById('strapi-practical-info-text')
+    const practicalInformationImage = document.getElementById('strapi-practical-info-image')
+    const headerImg = document.querySelector('.header-img')
+
+    headerImg.style.backgroundImage = `url('${strapi_uri}${data.header.data.attributes.url}')`;
+
+    practicalInformationText.innerHTML = data.practicalInformation
+    practicalInformationImage.src = `${strapi_uri}${data.practicalImage.data.attributes.url}`
+    practicalInformationImage.alt = data.practicalImage.data.attributes.caption
+  }
+
+  const fillDeveloperData = (data) => {
+    const devContainer = document.querySelector('.meta-section')
+
+    data.forEach((item) => {
+      const image_url = `${strapi_uri}${item.attributes.image.data.attributes.url}`
+
+      const container = document.createElement("article");
+
+      const title = document.createElement("h3");
+      title.innerHTML = item.attributes.name;
+
+      const desc = document.createElement("p");
+      desc.innerHTML = item.attributes.description;
+
+      const textContainer = document.createElement("div");
+
+      const image = document.createElement("img");
+      image.src = image_url;
+      image.alt = item.attributes.image.data.attributes.caption;
+
+      textContainer.appendChild(title);
+      textContainer.appendChild(desc);
+      container.appendChild(image);
+      container.appendChild(textContainer);
+      devContainer.appendChild(container);
+
+    })
+  }
+
+  const fillFeaturesData = (data) => {
+    const featuresContainer = document.querySelector('.features')
+
+    data.forEach((item) => {
+      const container = document.createElement("article");
+
+      const title = document.createElement("h3");
+      title.innerHTML = item.attributes.title;
+
+      const body = document.createElement("p");
+      body.innerHTML = item.attributes.body;
+
+      container.appendChild(title);
+      container.appendChild(body);
+      featuresContainer.appendChild(container);
+    });
+  }
+
+
+  fetchIntroData();
+  fetchDevelopersData();
+  fetchFeaturesData();
 }
-
-const fetchDevelopersData = async () => {
-  const url = `${strapi_uri}/api/developers?populate=image`;
-
-  const response = await fetch(url);
-  const data = await response.json();
-
-  fillDeveloperData(data.data);
-}
-
-const fetchFeaturesData = async () => {
-  const url = `${strapi_uri}/api/features`;
-
-  const response = await fetch(url);
-  const data = await response.json();
-
-  fillFeaturesData(data.data);
-}
-
-const fillIntroData = (data) => {
-  const practicalInformationText = document.getElementById('strapi-practical-info-text')
-  const practicalInformationImage = document.getElementById('strapi-practical-info-image')
-  const headerImg = document.querySelector('.header-img')
-
-  headerImg.style.backgroundImage = `url('${strapi_uri}${data.header.data.attributes.url}')`;
-
-  practicalInformationText.innerHTML = data.practicalInformation
-  practicalInformationImage.src = `${strapi_uri}${data.practicalImage.data.attributes.url}`
-  practicalInformationImage.alt = data.practicalImage.data.attributes.caption
-}
-
-const fillDeveloperData = (data) => {
-  const devContainer = document.querySelector('.meta-section')
-
-  data.forEach((item) => {
-    const image_url = `${strapi_uri}${item.attributes.image.data.attributes.url}`
-
-    const container = document.createElement("article");
-
-    const title = document.createElement("h3");
-    title.innerHTML = item.attributes.name;
-
-    const desc = document.createElement("p");
-    desc.innerHTML = item.attributes.description;
-
-    const textContainer = document.createElement("div");
-
-    const image = document.createElement("img");
-    image.src = image_url;
-    image.alt = item.attributes.image.data.attributes.caption;
-
-    textContainer.appendChild(title);
-    textContainer.appendChild(desc);
-    container.appendChild(image);
-    container.appendChild(textContainer);
-    devContainer.appendChild(container);
-
-  })
-}
-
-const fillFeaturesData = (data) => {
-  const featuresContainer = document.querySelector('.features')
-
-  data.forEach((item) => {
-    const container = document.createElement("article");
-
-    const title = document.createElement("h3");
-    title.innerHTML = item.attributes.title;
-
-    const body = document.createElement("p");
-    body.innerHTML = item.attributes.body;
-    
-    container.appendChild(title);
-    container.appendChild(body);
-    featuresContainer.appendChild(container);
-  });
-}
-
-
-fetchIntroData();
-fetchDevelopersData();
-fetchFeaturesData();
