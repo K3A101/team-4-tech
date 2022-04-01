@@ -1,75 +1,73 @@
+<section id="filter-container">
+    <div class="container">
+        <input id="search" class="search" type="text" placeholder="Zoek een land" />
 
-        <section>
-            <div class="container">
-                <input id="search" class="search" type="text" placeholder="Zoek een land" />
+        <div class="dropdown" id="filter">
+            Kies een regio
+            <ul>
+                <li>All</li>
+                <li>Africa</li>
+                <li>Americas</li>
+                <li>Asia</li>
+                <li>Europe</li>
+                <li>Oceania</li>
+            </ul>
+        </div>
+        <div class="dropdown" id="filter2">
+            Kies een taal
+            <ul>
+                <li>All</li>
+                <li>Albanian</li>
+                <li>Arabic</li>
+                <li>Armenian</li>
+                <li>Bulgarian</li>
+                <li>Catalan</li>
+                <li>Czech</li>
+                <li>Dutch</li>
+                <li>English</li>
+                <li>French</li>
+                <li>German</li>
+                <li>Japanese</li>
+                <li>Pashto</li>
+                <li>Portuguese</li>
+                <li>Spanish</li>
+                <li>Swedish</li>
+                <li>Vietnamese</li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-                <div class="dropdown" id="filter">
-                    Kies een regio
-                    <ul>
-                        <li>All</li>
-                        <li>Africa</li>
-                        <li>Americas</li>
-                        <li>Asia</li>
-                        <li>Europe</li>
-                        <li>Oceania</li>
-                    </ul>
+<section>
+    <div class="container countries" id="countries">
+
+        <% countries.forEach((country) => { %>
+        <div class="card">
+            <a href="/country/<%= country.alpha3Code %> ">
+                <img src=<%= country.flag %> alt="vlag">
+
+                <div class="card-body">
+                    <h2 class="country-name"><%= country.name %></h2>
+                    <p class="country-region"><strong>Regio:</strong> <span><%= country.region %></span></p>
+                    <p><strong>Populatie: </strong><span><%= country.population %></span></p>
+                    <p><strong>Hoofdstad:</strong><span><%= country.capital %></span></p>
+                    <p class="country-language">
+                        <strong>Taal:</strong><span><%= country.languages[0].name %></span></p>
                 </div>
-                <div class="dropdown" id="filter2">
-                    Kies een taal
-                    <ul>
-                        <li>All</li>
-                        <li>Albanian</li>
-                        <li>Arabic</li>
-                        <li>Armenian</li>
-                        <li>Bulgarian</li>
-                        <li>Catalan</li>
-                        <li>Czech</li>
-                        <li>Dutch</li>
-                        <li>English</li>
-                        <li>French</li>
-                        <li>German</li>
-                        <li>Japanese</li>
-                        <li>Pashto</li>
-                        <li>Portuguese</li>
-                        <li>Spanish</li>
-                        <li>Swedish</li>
-                        <li>Vietnamese</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+            </a>
 
-        <section>
-            <div class="container countries" id="countries">
+            <form action="/mijnlijst" method="post">
+                <input type="hidden" name="land" id="land" value="<%= country.name %>">
+                <input type="hidden" name="populatie" id="populatie" value="<%= country.population %>">
+                <input type="hidden" name="regio" id="regio" value="<%= country.region %>">
+                <input type="hidden" name="capital" id="capital" value="<%= country.capital %>">
+                <input type="hidden" name="language" id="language" value="<%= country.languages[0].name %>">
 
-                <% countries.forEach((country) => { %>
-                <div class="card">
-                    <a href="/country/<%= country.alpha3Code %> ">
-                        <img src=<%= country.flag %> alt="vlag">
+                <input type="hidden" name="alpha" id="alpha" value="<%= country.alpha3Code %>">
+                <input type="submit" value="+ favorieten">
+            </form>
+        </div>
+        <% }) %>
 
-                        <div class="card-body">
-                            <h2 class="country-name"><%= country.name %></h2>
-                            <p class="country-region"><strong>Regio:</strong> <span><%= country.region %></span></p>
-                            <p><strong>Populatie: </strong><span><%= country.population %></span></p>
-                            <p><strong>Hoofdstad:</strong><span><%= country.capital %></span></p>
-                            <p class="country-language">
-                                <strong>Taal:</strong><span><%= country.languages[0].name %></span></p>
-                        </div>
-                    </a>
-
-                    <form action="/mijnlijst" method="post">
-                        <input type="hidden" name="land" id="land" value="<%= country.name %>">
-                        <input type="hidden" name="populatie" id="populatie" value="<%= country.population %>">
-                        <input type="hidden" name="regio" id="regio" value="<%= country.region %>">
-                        <input type="hidden" name="capital" id="capital" value="<%= country.capital %>">
-                        <input type="hidden" name="language" id="language" value="<%= country.languages[0].name %>">
-                        
-                        <input type="hidden" name="alpha" id="alpha" value="<%= country.alpha3Code %>">
-                        <input type="submit" value="+ favorieten">
-                    </form>
-                </div>
-                <% }) %>
-
-            </div>
-        </section>
-    <script src="/scripts/script.js"></script>
+    </div>
+</section>
