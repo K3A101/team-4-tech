@@ -76,3 +76,26 @@ Wat we hebben besproken:
 - Wireflows gemaakt 
 - Logboek bijgehoden
 - Aanmeld formulier gemaakt.
+
+---
+# Week 2
+Wat we hebben gedaan:
+- 
+
+### Michael
+- Bundler onderzoeken om css te minifyen
+
+### Sjoerd
+- App.js refactor
+- Matching functie gemaakt 
+- Inlog functie verbeteren
+
+### Luc
+- Het registreer en log in functie gewerkt en in het prototype toegevoegd.
+- Backend Topic gedocumenteerd 
+- 
+
+### Keïsha
+- Backend-topic express validator onderzocht en geimplementeerd
+- Matching me applicatie gestijld 
+- Wiki documentatie 
