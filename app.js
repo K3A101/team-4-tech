@@ -270,7 +270,6 @@ const AddNewUserForm = async (req, res) => {
 			console.log('Account succesvol aangemaakt');
 		} catch (error) {
 			console.log(error);
-			console.log('Er is iets fout gegaan');
 			await res.redirect('/registreren');
 		}
 	}
