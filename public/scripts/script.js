@@ -39,8 +39,6 @@ function useFilter() {
     async function getinfo() {
         const res = await fetch('https://restcountries.com/v2/all');
         const countries = await res.json();
-
-        console.log(countries);
     }
 
     //zoek een land
