@@ -1,23 +1,35 @@
-<h1>MATCH ME PAGE</h1>
+<h1 class="match-me-title">MATCH ME!</h1>
 <section class="card cursor-normal">
-        <img src=<%= data.flag %> alt="vlag">
 
-        <div class="card-body">
-            <h2 class="country-name"  id="country-name"><%= data.name %></h2>
-            <p class="country-region"><strong>Regio:</strong> <span><%= data.region %></span></p>
-            <p><strong>Populatie: </strong><span><%= data.population %></span></p>
-            <p><strong>Hoofdstad:</strong><span><%= data.capital %></span></p>
-            <p class="country-language">
-                <strong>Taal:</strong><span><%= data.languages[0].name %></span></p>
-        </div>
+  <section class="land-container">
 
-        <article id="weather-data"></article>
+    <img class="flag-image" src=<%= data.flag %> alt="vlag">
 
-        <article id="bereken_section">
+
+
+  </section>
+
+
+  <section class="land-information">
+    <article class="card-body">
+      <h2 class="country-name" id="country-name"><%= data.name %></h2>
+      <p class="country-region"><strong>Regio:</strong> <span><%= data.region %></span></p>
+      <p><strong>Populatie: </strong><span><%= data.population %></span></p>
+      <p><strong>Hoofdstad:</strong><span><%= data.capital %></span></p>
+      <p class="country-language">
+        <strong>Taal:</strong><span><%= data.languages[0].name %></span></p>
+    </article>
+
+    <article id="weather-data">
+      <h2 class="content-title">Het Weer</h2>
+    </article>
+
+    <article id="bereken_section">
+      <h2 class="content-title" >Valutawissel</h2>
       <h1>Bereken de waarde van je geld voordat je vertrekt!</h1>
       <div class="left_box">
         <label for="number">Euro:</label>
-        <input type="number" name="" id="nummer">
+        <input type="number" name="" id="nummer" placeholder="Voer een waarde in">
       </div>
 
       <div class="right_box">
@@ -25,8 +37,8 @@
         <input type="text" name="" id="antwoord" disabled>
       </div>
     </article>
-    <p id="currencyvalue"><%= data.currencies[0].code %></p>
     
+    <p id="currencyvalue"><%= data.currencies[0].code %></p>
 
     <article class="card-button-container">
       <form action="/match-me/add" method="POST">
@@ -35,14 +47,19 @@
         <input type="hidden" name="regio" id="regio" value="<%= data.region %>">
         <input type="hidden" name="capital" id="capital" value="<%= data.capital %>">
         <input type="hidden" name="language" id="language" value="<%= data.languages[0].name %>">
-        
+
         <input type="hidden" name="alpha" id="alpha" value="<%= data.alpha3Code %>">
-        
-        <a href="/match-me">Verwijder</a>
-        <button type="submit">+ Favoriet</button>
-      </form>      
+
+        <a class="remove-button" href="/match-me">Verwijder</a>
+        <button class="favorite-button" type="submit">+ Favoriet</button>
+      </form>
     </article>
+  </section>
+
+
+
+
 </section>
 
 <script src="/scripts/weatherAPI.js"></script>
-  <script src="/scripts/currencyApi.js"></script>
+<script src="/scripts/currencyApi.js"></script>
