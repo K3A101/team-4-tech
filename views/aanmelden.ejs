@@ -10,13 +10,14 @@
 					name="email"
 					id="email"
 					placeholder="Gebruikersnaam of wachtwoord"
+					autocomplete="username"
 				/>
 			</fieldset>
 
 			<!-- Wachtwoord invoeren -->
 			<fieldset>
 				<label for="wachtwoord">Wachtwoord</label>
-				<input type="password" name="wachtwoord" placeholder="Wachtwoord" />
+				<input type="password" name="wachtwoord" placeholder="Wachtwoord"  autocomplete="current-password"/>
 			</fieldset>
 
 			<fieldset>
@@ -31,3 +32,13 @@
 
 	<section class="image-container"></section>
 </section>
+
+<% if(err) { %>
+<article id="toaster">
+	<% err.forEach((item) => { %>
+	<p>
+		<%= item.msg %>
+	</p>
+	<% }) %>
+</article>
+<% } %>

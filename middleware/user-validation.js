@@ -17,19 +17,19 @@ exports.validateUserSignUp = [
     check('gebruikersnaam').trim().not().isEmpty().withMessage('Gebruikersnaam is leeg').isLength({
         min: 3,
         max: 30
-    }).withMessage('Voornaam moet tussen 3 en 30 karakters zijn'),
+    }).withMessage('Gebruikersnaam moet tussen 3 en 30 karakters zijn'),
     check('wachtwoord').trim().not().isEmpty().withMessage('Wachtwoord is leeg').isLength({
         min: 3,
         max: 20
     }).withMessage('Wachtwoord moet tussen 3 en 20 karakters lang zijn')
-]
+   ]
 
 exports.userValidation = (req, res, next) => {
     const result = validationResult(req).array();
 	const loggedInUser = req.session.user ? req.session.user : null;
 
     if (result.length > 0) {
-        res.render('registreren', {
+        res.render('registreren',  {
             err: result,
 		    user: loggedInUser,
         });

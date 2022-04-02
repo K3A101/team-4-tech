@@ -11,6 +11,7 @@ const {
 	validateUserSignUp,
 	userValidation,
 } = require('./middleware/user-validation');
+const {validateUserLogin , loginResult} = require('./middleware/login-validation')
 const port = process.env.PORT || 3000;
 const dotenv = require('dotenv').config();
 
@@ -89,10 +90,11 @@ app.get('/', async (req, res) => {
 // Aanmelden formulier
 app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
+	const err = null;
 	if (loggedInUser) {
 		res.render('profile', { user: loggedInUser });
 	} else {
-		res.render('aanmelden', { user: loggedInUser });
+		res.render('aanmelden', { user: loggedInUser, err:err });
 	}
 });
 
@@ -123,7 +125,7 @@ app.get('/profile', (req, res) => {
 
 // route for sing-in form
 app.post(
-	'/aanmelden',
+	'/aanmelden', validateUserLogin, loginResult,
 	passport.authenticate('local', {
 		successRedirect: '/profile',
 		failureRedirect: '/registreren',
