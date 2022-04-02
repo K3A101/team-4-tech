@@ -1,4 +1,4 @@
-const strapiContainer = document.getElementById("introduction-page");
+const strapiContainer = document.querySelector(".introduction-page");
 strapiContainer && getStrapi()
 
 function getStrapi() {
