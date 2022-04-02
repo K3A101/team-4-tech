@@ -5,16 +5,15 @@
 
 <section id="bereken_section">
   <h1>Bereken de waarde van je geld voordat je vertrekt!</h1>
-  <div class="left_box">
+  <article class="left_box">
     <label for="number">Euro:</label>
     <input type="number" name="" id="nummer">
-  </div>
+  </article>
 
-  <div class="right_box">
+  <article class="right_box">
     <label for="antwoord"><%= data.currencies[0].code %>:</label>
     <input type="text" name="" id="antwoord" disabled>
-  </div>
-
-
+  </article>
 </section>
+
 <p id="currencyvalue"><%= data.currencies[0].code %></p>
