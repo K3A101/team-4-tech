@@ -1,7 +1,7 @@
 <section>
     <% user.countries.forEach(function(item){ %>
 
-    <section>
+    <article>
         <h2><%= item.land %></h2>
         <h3>Populatie: <%= item.populatie %></h3>
         <h3>Regio: <%= item.regio %></h3>
@@ -10,6 +10,6 @@
         <form action="/mijn-lijst/delete/<%= item.alpha %>" method="POST">
             <button onclick="showToaster('<%= item.land %> verwijderd uit favorieten')" type="submit">Verwijder</button>
         </form>
-    </section>
+    </article>
     <% }) %>
 </section>

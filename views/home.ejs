@@ -1,5 +1,5 @@
 <section id="filter-container">
-    <div class="container">
+    <section class="container">
         <input id="search" class="search" type="text" placeholder="Zoek een land" />
 
         <div class="dropdown" id="filter">
@@ -35,24 +35,24 @@
                 <li>Vietnamese</li>
             </ul>
         </div>
-    </div>
+    </section>
 </section>
 
 <section>
-    <div class="container countries" id="countries">
+    <section class="container countries" id="countries">
         <% countries.forEach((country) => { %>
-        <div class="card">
+        <article class="card">
             <a href="/country/<%= country.alpha3Code %> ">
                 <img class="flag" src=<%= country.flag %> alt="vlag">
 
-                <div class="card-body">
+                <article class="card-body">
                     <h2 class="country-name"><%= country.name %></h2>
                     <p class="country-region"><strong>Regio:</strong> <span><%= country.region %></span></p>
                     <p><strong>Populatie: </strong><span><%= country.population %></span></p>
                     <p><strong>Hoofdstad:</strong><span><%= country.capital %></span></p>
                     <p class="country-language">
                     <strong>Taal:</strong><span><%= country.languages[0].name %></span></p>
-                </div>
+                </article>
             </a>
             <form action="/mijnlijst/add" method="post">
                 <input type="hidden" name="land" id="land" value="<%= country.name %>">
@@ -64,7 +64,7 @@
                 <input type="hidden" name="alpha" id="alpha" value="<%= country.alpha3Code %>">
                 <input onclick="showToaster('<%= country.name %> toegevoegd aan favorieten')" type="submit" value="+ favorieten">
             </form>
-        </div>
+        </article>
         <% }) %>
-    </div>
+    </section>
 </section>
