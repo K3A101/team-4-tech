@@ -1,35 +1,43 @@
-const weatherContainer = document.getElementById("bereken_section");
-weatherContainer && getWeather()
+const weatherContainer = document.getElementById('bereken_section');
+weatherContainer && getWeather();
 
 function getWeather() {
+	const fetchWeather = async () => {
+		const countryName = document.getElementById('country-name').innerText;
+		const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${countryName}?unitGroup=metric&key=T34UCHC8WQQH83SAKKUC7CLRC&contentType=json`;
 
-  const fetchWeather = async () => {
+		const response = await fetch(url);
+		const data = await response.json();
 
-    const countryName = document.getElementById('country-name').innerText
-    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${countryName}?unitGroup=metric&key=T34UCHC8WQQH83SAKKUC7CLRC&contentType=json`;
+		setWeatherData(data);
+	};
 
-    const response = await fetch(url);
-    const data = await response.json();
+	const setWeatherData = (data) => {
+		const container = document.getElementById('weather-data');
 
-    setWeatherData(data)
-  }
+		data.days.forEach((day) => {
+			console.log(day);
+			const dayContainer = document.createElement('article');
 
-  const setWeatherData = (data) => {
-    const container = document.getElementById('weather-data')
+			const date = document.createElement('h4');
+			date.innerText = day.datetime;
+			dayContainer.appendChild(date);
 
-    const img = document.createElement("img");
-    img.src = `/images/weather-icons/${data.currentConditions.icon}.png`;
-    container.appendChild(img);
+			const img = document.createElement('img');
+			img.src = `/images/weather-icons/${day.icon}.png`;
+			dayContainer.appendChild(img);
 
-    const temp = document.createElement("p");
-    temp.innerText = `Tempratuur: ${data.currentConditions.temp}`;
-    container.appendChild(temp);
+			const temp = document.createElement('p');
+			temp.innerText = `Tempratuur: ${day.temp}`;
+			dayContainer.appendChild(temp);
 
-    const wind = document.createElement("p");
-    wind.innerText = `Windsnelheid: ${data.currentConditions.windspeed} km/uur`;
-    container.appendChild(wind);
-  }
+			const wind = document.createElement('p');
+			wind.innerText = `Windsnelheid: ${day.windspeed} km/uur`;
+			dayContainer.appendChild(wind);
 
-  fetchWeather()
+			container.appendChild(dayContainer);
+		});
+	};
 
+	fetchWeather();
 }

@@ -62,7 +62,7 @@
                 <input type="hidden" name="language" id="language" value="<%= country.languages[0].name %>">
                 
                 <input type="hidden" name="alpha" id="alpha" value="<%= country.alpha3Code %>">
-                <input type="submit" value="+ favorieten">
+                <input onclick="showToaster('<%= country.name %> toegevoegd aan favorieten')" type="submit" value="+ favorieten">
             </form>
         </div>
         <% }) %>
