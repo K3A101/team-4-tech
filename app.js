@@ -286,9 +286,13 @@ const addCountryToFavorites = async (req, res) => {
 		alpha: req.body.alpha,
 	};
 
-	const user = await User.findOne({ email: loggedInUser.email });
-	user.countries.push(form);
-	await user.save();
+	if (!loggedInUser) {
+		res.redirect('/aanmelden');
+	} else {
+		const user = await User.findOne({ email: loggedInUser.email });
+		user.countries.push(form);
+		await user.save();
+	}
 };
 const RemoveCountryFromList = async (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
