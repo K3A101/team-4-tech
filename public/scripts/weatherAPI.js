@@ -16,7 +16,6 @@ function getWeather() {
 		const container = document.getElementById('weather-data');
 
 		data.days.forEach((day) => {
-			console.log(day);
 			const dayContainer = document.createElement('article');
 
 			const date = document.createElement('h4');
