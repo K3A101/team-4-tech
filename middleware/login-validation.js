@@ -7,7 +7,20 @@
  exports.validateUserLogin = [
        check('email').normalizeEmail().isEmail().withMessage('Email is niet geldig'),
 
-     check('wachtwoord').not().isEmpty().withMessage('Wachtwoord is verplicht!') ]
+     check('wachtwoord').not().isEmpty().withMessage('Wachtwoord is verplicht!'),
+     
+     check('wachtwoord').exists().custom((value, {
+                 req, res, next
+             }) => {
+                 if (value !== req.body.wachtwoord) {
+                     throw new Error('Wachtwoord is niet correct');
+                 }else {
+                     return true
+                 }
+                }
+                 
+                 )
+                ]
 
 exports.loginResult = (req, res, next) => {
     const result = validationResult(req).array();
