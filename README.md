@@ -38,16 +38,22 @@ npm install
 ```
 npm run watch
 ```
+## Collaborators 
+- Sjoerd Reen 
+- Michael Wilhelm
+- Luc van der Heiden
+- Keïsha Alexander
+- Marijn de Bruin
 
+## Database structuur
+Hier is een voorpoefje van het database structuur voor het registreren functie en de  landen vanuit de 
  
  ## Wiki
  In de Wiki kan je informatie vinden over het progres, informatie  over en laat ik zien welk onderzoek ik heb gedaan. Ook vertel ik waarom ik bepaalde keuzes heb gemaakt.
 
- ## Code of Conduct
- ### regels
- Code is bruikbaar voor iedereen
- Hou het netjes op de GitHub, bedankt..
-
+## Code of Conduct
+We volgen de richtlijnen van blok tech met de voorwaarde van MIT license. Verder is de code bruikbaar voor iedereen. 
  ## License
+
  De license voor de applicatie is MIT. Meer informatie over de license vind je [hier](https://github.com/Inevdhoven/blok-tech/blob/main/license).
 
