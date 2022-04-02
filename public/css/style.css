@@ -1,48 +1,47 @@
 * {
-    padding: 0;
-    margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 :root {
-    --main-color: black;
-    --secondary-color: #47A638;
-    --highlight-color: #7070f8;
-    --tekst-color: black;
-    --background-color: white;
-    --background-highlight-color: #ffffff;
-    --main-background-color: #B0D7F8;
+	--main-color: black;
+	--secondary-color: #47a638;
+	--highlight-color: #7070f8;
+	--tekst-color: black;
+	--background-color: white;
+	--background-highlight-color: #ffffff;
+	--main-background-color: #b0d7f8;
 
-    --shadow-color: #2F4F4F33;
+	--shadow-color: #2f4f4f33;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--main-background-color);
-    font-family: 'Saira', sans-serif;
-    color: var(--main-color);
-
+	margin: 0;
+	padding: 0;
+	background-color: var(--main-background-color);
+	font-family: 'Saira', sans-serif;
+	color: var(--main-color);
 }
 
 header {
-    background-color: rgb(0, 0, 0);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    left: 0;
-    right: 0;
-    top: 0;
-    padding-left: 3em;
-    padding-right: 5em;
-    z-index: 1;
+	background-color: rgb(0, 0, 0);
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	left: 0;
+	right: 0;
+	top: 0;
+	padding-left: 3em;
+	padding-right: 5em;
+	z-index: 1;
 }
 
 /*formulier die ik eerst had gebruikt ipv filter knoppen*/
@@ -183,91 +182,86 @@ legend {
 /******************/
 
 header nav {
-
-    flex-grow: 1;
-    font-weight: bold;
-
+	flex-grow: 1;
+	font-weight: bold;
 }
 
 header nav ul {
-    display: flex;
+	display: flex;
 }
 
 .links {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 header nav a {
-    text-decoration: none;
-    outline: none;
-    color: white;
-    display: block;
-    text-align: center;
-    line-height: 3.5em;
-    text-transform: uppercase;
-    padding: 0rem 1rem;
+	text-decoration: none;
+	outline: none;
+	color: white;
+	display: block;
+	text-align: center;
+	line-height: 3.5em;
+	text-transform: uppercase;
+	padding: 0rem 1rem;
 }
 
 header nav a:hover {
-
-    color: var(--highlight-color);
+	color: var(--highlight-color);
 }
 
 header nav a:focus {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 header nav ul:last-of-type li:last-of-type a {
-    background-color: var(--highlight-color);
-    text-decoration: none;
-    outline: none;
-    color: white;
-    display: block;
-    text-align: center;
-    line-height: 3.5em;
-    text-transform: uppercase;
+	background-color: var(--highlight-color);
+	text-decoration: none;
+	outline: none;
+	color: white;
+	display: block;
+	text-align: center;
+	line-height: 3.5em;
+	text-transform: uppercase;
 }
 
 header li {
-    list-style: none;
+	list-style: none;
 }
 
 header nav li:last-of-type a:hover {
-
-    color: var(--highlight-color);
+	color: var(--highlight-color);
 }
 
 header nav li:last-of-type a:focus {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
-
 img {
-    max-width: 100%;
+	max-width: 100%;
 }
 /******************/
 /* HAMBURGERMENU */
 /******************/
 
 .toggle-button {
-    position: fixed;
-    top: .75rem;
-    right: 2rem;
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 40px;
-    height: 32px;
-    background-color: var(--highlight-color);
-    z-index: 1;
+	position: fixed;
+	top: 0.75rem;
+	right: 2rem;
+	display: none;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 40px;
+	height: 32px;
+	background-color: var(--highlight-color);
+	z-index: 1;
 }
 
 .toggle-button .bar {
-    height: 3px;
-    width: 100%;
-    background-color: white;
-    border-radius: 10px;
+	height: 3px;
+	width: 100%;
+	background-color: white;
+	border-radius: 10px;
 }
 
 /******************/
@@ -276,52 +270,50 @@ Bron: https: //www.youtube.com/watch?v=At4B7A4GOPg */
 /******************/
 
 @media (max-width: 750px) {
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-        background-color: var(--main-color);
-        position: absolute;
-        right: 0;
-    }
+	nav {
+		flex-direction: column;
+		align-items: flex-start;
+		background-color: var(--main-color);
+		position: absolute;
+		right: 0;
+	}
 
-    header nav li:nth-last-of-type(2) {
-        margin: 0;
-    }
+	header nav li:nth-last-of-type(2) {
+		margin: 0;
+	}
 
-    .toggle-button {
-        display: flex;
-        border: 2px solid var(--highlight-color);
-    }
+	.toggle-button {
+		display: flex;
+		border: 2px solid var(--highlight-color);
+	}
 
-    .links.active {
-        display: block;
-    }
+	.links.active {
+		display: block;
+	}
 
-    .links {
-        display: none;
-        width: 100%;
-    }
+	.links {
+		display: none;
+		width: 100%;
+	}
 
-    .links ul {
-        width: 100%;
-        flex-direction: column;
-    }
+	.links ul {
+		width: 100%;
+		flex-direction: column;
+	}
 
-    .links ul li {
-        text-align: left;
-        border-bottom: 1px solid var(--highlight-color);
-    }
+	.links ul li {
+		text-align: left;
+		border-bottom: 1px solid var(--highlight-color);
+	}
 
-    .links ul li a {
-        padding: .5rem 1rem;
-    }
-
-
+	.links ul li a {
+		padding: 0.5rem 1rem;
+	}
 }
 
 #samenvatting {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 /******************/
@@ -329,433 +321,442 @@ Bron: https: //www.youtube.com/watch?v=At4B7A4GOPg */
 /******************/
 
 .container {
-    margin: 0 auto;
-    max-width: 1440px;
-    padding: 30px;
+	margin: 0 auto;
+	max-width: 1440px;
+	padding: 30px;
 }
 
 h1 {
-    margin: 0;
+	margin: 0;
 }
-
 
 /* Input styling Florin Pop */
 .search {
-    background-color: white;
-    border-radius: 4px;
-    border: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
-    color: inherit;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 14px;
-    padding: 20px;
-    min-width: 300px;
+	background-color: white;
+	border-radius: 4px;
+	border: none;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
+	color: inherit;
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 14px;
+	padding: 20px;
+	min-width: 300px;
 }
 
 /* Dropdown styling */
 .dropdown {
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
-    cursor: pointer;
-    font-size: 14px;
-    padding: 20px;
-    margin: 10px;
-    position: relative;
+	border-radius: 4px;
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
+	cursor: pointer;
+	font-size: 14px;
+	padding: 20px;
+	margin: 10px;
+	position: relative;
 }
 
 .dropdown ul {
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
-    display: none;
-    padding: 20px;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    list-style-type: none;
-    width: 100%;
-    z-index: 99;
+	border-radius: 4px;
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
+	display: none;
+	padding: 20px;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	list-style-type: none;
+	width: 100%;
+	z-index: 99;
 }
 
 .dropdown.open ul {
-    display: block;
+	display: block;
 }
 
 .dropdown ul li {
-    margin: 10px 0;
+	margin: 10px 0;
 }
 
 /* landen styling van bron Florin Pop*/
 .card {
-    position: relative;
-    margin-bottom: 1em;
-    border-radius: 4px;
-    background-color: white;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
-    cursor: pointer;
-    overflow: hidden;
+	position: relative;
+	margin-bottom: 1em;
+	border-radius: 4px;
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
+	cursor: pointer;
+	overflow: hidden;
 }
 
 .flag {
-    object-fit: cover;
-    height: 200px;
-    width: 100%;
+	object-fit: cover;
+	height: 200px;
+	width: 100%;
 }
 
 .card a {
-    text-decoration: none !important;
-    color: var(--main-color);
-
+	text-decoration: none !important;
+	color: var(--main-color);
 }
 
 .card-body {
-
-    padding: 30px;
+	padding: 30px;
 }
 
 /* landen namen */
 .card-body h2 {
-    margin-bottom: .3em;
-    font-size: 1.8em;
-    border-bottom: 4px solid var(--secondary-color);
-
+	margin-bottom: 0.3em;
+	font-size: 1.8em;
+	border-bottom: 4px solid var(--secondary-color);
 }
 
 .card-body p {
-    padding: .5em;
+	padding: 0.5em;
 }
 
 .card-body span {
-
-    margin-left: 1em;
+	margin-left: 1em;
 }
 
 .card-body h3 {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 @media (max-width: 530px) {
-    body main section .container.countries {
-        grid-template-columns: repeat(1, 1fr);
-    }
+	body main section .container.countries {
+		grid-template-columns: repeat(1, 1fr);
+	}
 }
 
 @media (max-width: 800px) {
-    main section .container.countries {
-        grid-template-columns: repeat(2, 1fr);
-    }
+	main section .container.countries {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media (max-width: 1200px) {
-    section .container.countries {
-        grid-template-columns: repeat(3, 1fr);
-    }
+	section .container.countries {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
 
 .container.countries {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1rem;
 }
-
 
 /* styling voor de forms*/
 input {
-    border: none;
-
+	border: none;
 }
 
-input[type="submit"] {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: var(--secondary-color);
-    color: var(--background-color);
-    font-weight: bold;
-    border: 0;
-    padding: .7em;
-    transition: .3s;
+input[type='submit'] {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: var(--secondary-color);
+	color: var(--background-color);
+	font-weight: bold;
+	border: 0;
+	padding: 0.7em;
+	transition: 0.3s;
 }
 
-input[type="submit"]:active {
-    transform: scale(1.01);
+input[type='submit']:active {
+	transform: scale(1.01);
 }
 
-input[type="submit"]:hover {
-    background-color: var(--highlight-color);
-    color: white;
+input[type='submit']:hover {
+	background-color: var(--highlight-color);
+	color: white;
 }
 
 input::placeholder {
-    appearance: none;
-    font-family: 'Saira', sans-serif;
+	appearance: none;
+	font-family: 'Saira', sans-serif;
 }
 
 /*Mijnlijst*/
 #mijnlijst main {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin: 0 auto;
-    max-width: 1440px;
-    padding: 30px;
-    position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin: 0 auto;
+	max-width: 1440px;
+	padding: 30px;
+	position: relative;
 }
 
 #mijnlijst section {
-    background-color: white;
-    width: 300px;
-    padding: 10px;
-    margin: 10px;
-
+	background-color: white;
+	width: 300px;
+	padding: 10px;
+	margin: 10px;
 }
 
 #mijnlijst h1 {
-    margin-left: 40px;
-    margin-top: 40px;
+	margin-left: 40px;
+	margin-top: 40px;
 }
 
 /*countryDetail*/
 #currencyvalue {
-    display: none;
+	display: none;
 }
 
 #bereken_section {
-    margin: 1em 0;
+	margin: 1em 0;
 }
 
-.left_box input[type=number] {
-    width: 15em;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
+.left_box input[type='number'] {
+	width: 15em;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
 }
 
-.left_box input[type=number]:hover {
-    background-color: #47a63848;
-    
+.left_box input[type='number']:hover {
+	background-color: #47a63848;
 }
 
-.left_box input[type=number]:focus {
-    outline-color: #47A638;
-    
+.left_box input[type='number']:focus {
+	outline-color: #47a638;
 }
-.right_box input[type=text] {
-    width: 15em;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
+.right_box input[type='text'] {
+	width: 15em;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
 }
 
 /* INTRODUCTION PAGE */
 .header-img {
-    width: 100%;
-    height: 27rem;
-    background-image: url('/images/vakantie.jpg');
-    background-size: cover;
+	width: 100%;
+	height: 27rem;
+	background-image: url('/images/vakantie.jpg');
+	background-size: cover;
 }
 
 .introduction-page {
-    background-color: white;
+	background-color: white;
 }
 
 .col-span-2 {
-    grid-column: span 2;
+	grid-column: span 2;
 }
 
 .col-span-3 {
-    grid-column: span 3;
+	grid-column: span 3;
 }
 
 .grid-two-column {
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+	padding: 2rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
 }
 
 .grid-three-column {
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+	padding: 2rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 3rem;
 }
 
 .introduction-page .text-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .features {
-    background: #f6f6f6;
-    padding: 3rem 2rem;
+	background: #f6f6f6;
+	padding: 3rem 2rem;
 }
 
 .meta-section {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    padding: 2rem;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2rem;
+	padding: 2rem;
 }
 
 .meta-section article {
-    display: flex;
-    align-items: center;
-    padding: 1.5rem;
-    gap: 2rem;
-    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+	display: flex;
+	align-items: center;
+	padding: 1.5rem;
+	gap: 2rem;
+	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+	background: #e4e4fe;
 }
 
 .meta-section article img {
-    width: 9rem;
-    height: fit-content;
+	width: 9rem;
+	height: fit-content;
 }
 
 /* Profielpagina */
 #profiel-titel,
 .profielpagina {
-    margin: 0 auto;
-    width: 35%;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06),
-        0 1px 2px rgba(0, 0, 0, 0.12);
+	margin: 0 auto;
+	width: 35%;
+	border-radius: 6px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
 }
 
 #profiel-titel {
-    color: var(--background-color);
-    padding: .5em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    border-radius: 6px;
-    background-color: var(--secondary-color);
+	color: var(--background-color);
+	padding: 0.5em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	border-radius: 6px;
+	background-color: var(--secondary-color);
 }
 
-
 .profielpagina h2 {
-    color: var(--secondary-color);
+	color: var(--secondary-color);
 }
 
 .profielpagina {
-    padding: 3em;
-    background-color: white;
+	padding: 3em;
+	background-color: white;
 }
 
 .profiel-gegevens {
-    align-self: left;
-    margin: 1.5em 0;
+	align-self: left;
+	margin: 1.5em 0;
 }
 
 .profiel-gegevens ul {
-    display: flex;
+	display: flex;
 }
 
 .profiel-gegevens li {
-    flex-grow: 1;
-    list-style: none;
+	flex-grow: 1;
+	list-style: none;
 }
 
 .profielpagina a {
-    text-decoration: none;
-    font-weight: bold;
-    color: var(--background-color);
-    background-color: var(--secondary-color);
-    padding: 0.8em;
+	text-decoration: none;
+	font-weight: bold;
+	color: var(--background-color);
+	background-color: var(--secondary-color);
+	padding: 0.8em;
 }
 
 /* Toaster */
 .toaster {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    padding: 1rem 2rem;
-    max-width: 30rem;
-    color: white;
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	padding: 1rem 2rem;
+	max-width: 30rem;
+	color: white;
 }
 
 .toaster p {
-    margin: 0.5rem 0;
-    border-radius: 4px;
-    background: rgb(236, 47, 47);
-    padding: 1rem 2rem;
-    margin-bottom: 0.1rem;
-    list-style: disc;
+	margin: 0.5rem 0;
+	border-radius: 4px;
+	background: rgb(236, 47, 47);
+	padding: 1rem 2rem;
+	margin-bottom: 0.1rem;
+	list-style: disc;
 }
-
 
 /* Match me */
 .match-me-title {
-    text-align: center;
-    color: var(--background-color);
-    padding: 0.5em;
-    margin: 1em auto;
-    width: 80%;
-    border-radius: 6px;
-    background-color: var(--secondary-color);
+	text-align: center;
+	color: var(--background-color);
+	padding: 0.5em;
+	margin: 1em auto;
+	width: 80%;
+	border-radius: 6px;
+	background-color: var(--secondary-color);
 }
 
 .card.cursor-normal {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin:0 auto;
-    width: 80%;
-    height: 100%;
-    cursor: auto;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	margin: 0 auto;
+	width: 80%;
+	height: 100%;
+	cursor: auto;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .card-button-container form {
-    display: flex;
-    gap: 2rem;
-    justify-content: space-between;
-    width: 100%;
-    
+	display: flex;
+	gap: 2rem;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .flag-image {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
 }
 
 .land-information {
-    padding: 1rem;
+	padding: 1rem;
 }
 
-#weather-data, #bereken_section {
-    padding: .5rem 2rem;
+#weather-data {
+	display: flex;
+	gap: 2rem;
+	overflow: auto;
+}
+
+#weather-data,
+#bereken_section {
+	padding: 0.5rem 2rem;
 }
 
 .content-title {
-color: var(--secondary-color);
-
+	color: var(--secondary-color);
 }
 
 .card-button-container .remove-button {
-    flex-grow: 1;
-    text-align: center;
-    font-weight: bold;
-    color: var(--secondary-color);
-    background-color: var(--background-color);
-    border: 3px solid var(--secondary-color);
+	flex-grow: 1;
+	text-align: center;
+	font-weight: bold;
+	color: var(--secondary-color);
+	background-color: var(--background-color);
+	border: 3px solid var(--secondary-color);
 }
 
- .card-button-container .favorite-button {
-  flex-grow: 1;
-    background-color: var(--secondary-color);
-    color: var(--background-color);
-    font-weight: bold;
-    border: 0;
-    padding: .9em;
-    transition: .3s;
+.card-button-container .favorite-button {
+	flex-grow: 1;
+	background-color: var(--secondary-color);
+	color: var(--background-color);
+	font-weight: bold;
+	border: 0;
+	padding: 0.9em;
+	transition: 0.3s;
 }
 
 .card-button-container .favorite-button:active {
-    transform: scale(1.01);
+	transform: scale(1.01);
 }
 
 .favorite-button:hover {
-    background-color: var(--highlight-color);
-    color: white;
+	background-color: var(--highlight-color);
+	color: white;
+}
+
+#toaster {
+	position: fixed;
+	right: 1rem;
+	bottom: 1rem;
+	background: #ffa800;
+	padding: 0.4rem 1.5rem;
+	border-radius: 0.6rem;
+	max-width: 20rem;
+	color: white;
+	font-weight: 700;
+}
+
+.hidden {
+	display: none;
 }
