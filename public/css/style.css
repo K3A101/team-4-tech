@@ -320,6 +320,11 @@ Bron: https: //www.youtube.com/watch?v=At4B7A4GOPg */
 /* De gerenderde landen */
 /******************/
 
+#filter-container .container {
+	display: flex;
+	gap: 1rem;
+}
+
 .container {
 	margin: 0 auto;
 	max-width: 1440px;
@@ -351,7 +356,6 @@ h1 {
 	cursor: pointer;
 	font-size: 14px;
 	padding: 20px;
-	margin: 10px;
 	position: relative;
 }
 
@@ -702,6 +706,11 @@ input::placeholder {
 	padding: 1rem;
 }
 
+.weather-container {
+	overflow-x: auto;
+	width: 26rem;
+}
+
 #weather-data {
 	display: flex;
 	gap: 2rem;
@@ -760,3 +769,4 @@ input::placeholder {
 .hidden {
 	display: none;
 }
+
