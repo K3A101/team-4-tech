@@ -69,13 +69,9 @@ input[type="mail"] {
 
 /* Voor de voor- en achternaam input velden */
 .register-container .volledige-naam {
-    display: flex;
-    flex-direction: row;
-    gap: 3em;
-}
-
-.register-container .volledige-naam input {
-    width: 230px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
 }
 
 .register-container fieldset:nth-of-type(5) {
