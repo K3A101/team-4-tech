@@ -7,3 +7,5 @@ S. (2019, 28 december). How to create a git branch. Devconnected. Geraadpleegd o
 Stylelint. (z.d.). Getting started | stylelint. Geraadpleegd op 28 maart 2022, van https://stylelint.io/user-guide/get-started/
 
 Andrew. (2012, 22 januari). Update an outdated branch against master in a git repo [Online forum post]. Stack Overflow. https://stackoverflow.com/questions/8965781/update-an-outdated-branch-against-master-in-a-git-repo
+
+Niraj, F. S. [ Full Stack Niraj]. (2021, 21 april). Validating incoming data express vlaidator - node authentication API part-6 [Video]. YouTube. https://www.youtube.com/watch?v=pCdPJwZyT-w&feature=youtu.be
