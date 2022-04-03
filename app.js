@@ -103,11 +103,13 @@ app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 	if (loggedInUser) {
 		res.render('profile', {
-			user: loggedInUser
+			user: loggedInUser,
+			title: "Profile"
 		});
 	} else {
 		res.render('aanmelden', {
-			user: loggedInUser
+			user: loggedInUser,
+			title: "Aanmelden"
 		});
 	}
 });
@@ -117,19 +119,14 @@ app.get('/registreren', (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 	const err = null;
 
-	res.render('registreren', {
-		user: loggedInUser,
-		err: err
-	});
+	res.render('registreren', { user: loggedInUser, err: err, title: "Registreren" });
 });
 
 // introduction page
 app.get('/introduction', (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 
-	res.render('introduction', {
-		user: loggedInUser
-	});
+	res.render('introduction', { user: loggedInUser, title: "Introduction" });
 });
 
 // Detail page of each country
@@ -213,6 +210,7 @@ const homePage = async (req, res) => {
 	res.render('home', {
 		countries: countries,
 		user: loggedInUser,
+		title: "Landen"
 	});
 };
 const countryDetailPage = async (req, res) => {
@@ -225,6 +223,7 @@ const countryDetailPage = async (req, res) => {
 	res.render('countryDetail', {
 		data: countryData,
 		user: loggedInUser,
+		title: req.params.country
 	});
 };
 const profilePage = (req, res) => {
@@ -235,6 +234,7 @@ const profilePage = (req, res) => {
 	if (loggedInUser) {
 		res.render('profile', {
 			user: loggedInUser,
+			title: "Profiel"
 		});
 	} else {
 		res.redirect('/aanmelden');
@@ -248,13 +248,8 @@ const MatchMePage = async (req, res) => {
 	const randomInt = Math.floor(Math.random() * countries.length) + 1;
 
 	if (loggedInUser) {
-		const user = await User.findOne({
-			email: loggedInUser.email
-		});
-		res.render('match-me', {
-			user: user,
-			data: countries[randomInt]
-		});
+		const user = await User.findOne({ email: loggedInUser.email });
+		res.render('match-me', { user: user, data: countries[randomInt], title: "Match me" });
 	} else {
 		res.redirect('/aanmelden');
 	}
@@ -263,12 +258,8 @@ const MyListPage = async (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 
 	if (loggedInUser) {
-		const user = await User.findOne({
-			email: loggedInUser.email
-		});
-		res.render('mijnlijst', {
-			user: user
-		});
+		const user = await User.findOne({ email: loggedInUser.email });
+		res.render('mijnlijst', { user: user, title: "Mijn lijst" });
 	} else {
 		res.redirect('/aanmelden');
 	}
