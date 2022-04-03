@@ -45,9 +45,11 @@ npm run watch
 - Keïsha Alexander
 - Marijn de Bruin
 
+## Live demo van het Applicatie
+[https://reisplanner-app.herokuapp.com/](https://reisplanner-app.herokuapp.com/)
+
 ## Database structuur
-Hier is een voorpoefje van het database structuur voor het registreren functie en de  landen vanuit de 
- 
+Hier is een voorpoefje van het database structuur voor het registreren functie. 
  ## Wiki
  In de Wiki kan je informatie vinden over het progres, informatie  over en laat ik zien welk onderzoek ik heb gedaan. Ook vertel ik waarom ik bepaalde keuzes heb gemaakt.
 
