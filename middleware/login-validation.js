@@ -8,16 +8,6 @@
      check('email').normalizeEmail().isEmail().withMessage('Email is niet geldig'),
 
      check('wachtwoord').not().isEmpty().withMessage('Wachtwoord is verplicht!'),
-      
-     check('wachtwoord').exists().custom((value, {req }) => {
-                 if (value !== req.body.wachtwoord) {
-                     throw new Error('Wachtwoord is niet correct');
-                 }else {
-                     return 
-                 }
-                }
-                 
-                 )
                 
  ]
 

@@ -98,6 +98,7 @@ app.get('/', async (req, res) => {
 app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 	const err = null;
+
 	if (loggedInUser) {
 		res.render('profile', {
 			user: loggedInUser,
@@ -106,6 +107,7 @@ app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
 	} else {
 		
 		res.render('aanmelden', {
+			err: err,
 			user: loggedInUser,
 			title: 'Aanmelden',
 		});
@@ -142,13 +144,28 @@ app.get('/profile', (req, res) => {
 });
 
 // route for sing-in form
-app.post(
-	'/aanmelden', validateUserLogin, loginResult,
+app.post('/aanmelden', validateUserLogin, loginResult,
 	passport.authenticate('local', {
 		successRedirect: '/profile',
 		failureRedirect: '/registreren',
 		failureFlash: true,
-	})
+	}), (req, res) => {
+		const title = null;
+		const err = null;
+		 const result = validationResult(req).array();
+		 const loggedInUser = req.session.user ? req.session.user : null;
+
+		 if (result.length > 0) {
+		 	res.render('aanmelden', {
+		 		user: loggedInUser,
+		 		err: result,
+				 title: title,
+			
+		 	});
+		 } else {
+		 	return
+		 }
+	}
 );
 
 // route for singing out
