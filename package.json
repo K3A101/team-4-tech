@@ -10,7 +10,7 @@
     "postcompress": "{{ executes AFTER `compress` script }}",
     "start": "node app.js",
     "watch": "nodemon app.js",
-    "gulp": "gulp bundleJs",   
+    "bundleJs": "gulp bundleJs",
     "autoJs": "gulp automatischJs",
     "bundleCss": "gulp bundleCss",
     "autoCss": "gulp automatisch"

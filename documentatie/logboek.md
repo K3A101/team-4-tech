@@ -65,8 +65,7 @@ Wat we hebben besproken:
 
 ### Sjoerd
 - Weather API onderzoeken en in het project geimplemteerd
-- Introductiepagina gemaakt en iets.... geimplementeerd 
-- Backend Topic: 
+- Introductiepagina gemaakt en iets Headless CMS Strapi in project geimplementeerd 
 
 ### Luc
 - Het registreer en log in functie gewerkt en in het prototype toegevoegd.
@@ -76,3 +75,36 @@ Wat we hebben besproken:
 - Wireflows gemaakt 
 - Logboek bijgehoden
 - Aanmeld formulier gemaakt.
+
+---
+# Week 2
+Wat we hebben gedaan:
+- 
+
+### Michael
+- Bundler onderzoeken\
+- Gulp toegevoegd in project om de performance van de applicatie beter te maken
+- Mijn lijst pagina stijlen
+
+### Sjoerd
+- App.js refactor
+- Matching functie gemaakt 
+- Inlog functie verbeteren
+- Backend topic in wiki gezet
+
+### Luc
+- Het registreer en log in functie gewerkt en in het prototype toegevoegd.
+- Backend Topic gedocumenteerd 
+- Lnad detail Pagina stijlen 
+
+### Keïsha
+- Backend-topic express validator onderzocht en geimplementeerd
+- Matching me applicatie gestijld 
+- README aangepast
+- Wiki pdaten
+
+
+### Meetings
+31 Maart 2022 Fysiek
+1 April 2022 Online
+2 April 2022 Online

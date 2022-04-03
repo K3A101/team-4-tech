@@ -31,7 +31,8 @@ exports.userValidation = (req, res, next) => {
     if (result.length > 0) {
         res.render('registreren',  {
             err: result,
-		    user: loggedInUser,
+            user: loggedInUser,
+            title: "Registreren"
         });
     } else {
         return
