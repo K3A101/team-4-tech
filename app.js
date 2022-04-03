@@ -29,7 +29,10 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const dbURI = process.env.DB_URI;
 mongoose
-	.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+	.connect(dbURI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
 	.then((result) => console.log('connected to database'))
 	.catch((err) => console.log(err));
 
@@ -39,11 +42,15 @@ const bcryptjs = require('bcryptjs');
 initializePassport(
 	passport,
 	async (email) => {
-		const userIsFound = await User.findOne({ email });
+		const userIsFound = await User.findOne({
+			email,
+		});
 		return userIsFound;
 	},
 	async (id) => {
-		const userIsFound = await User.findOne({ _id: id });
+		const userIsFound = await User.findOne({
+			_id: id,
+		});
 		return userIsFound;
 	}
 );
@@ -90,9 +97,15 @@ app.get('/', async (req, res) => {
 app.get('/aanmelden', checkNotAuthenticated, (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 	if (loggedInUser) {
-		res.render('profile', { user: loggedInUser });
+		res.render('profile', {
+			user: loggedInUser,
+			title: 'Profile',
+		});
 	} else {
-		res.render('aanmelden', { user: loggedInUser });
+		res.render('aanmelden', {
+			user: loggedInUser,
+			title: 'Aanmelden',
+		});
 	}
 });
 
@@ -101,14 +114,18 @@ app.get('/registreren', (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 	const err = null;
 
-	res.render('registreren', { user: loggedInUser, err: err });
+	res.render('registreren', {
+		user: loggedInUser,
+		err: err,
+		title: 'Registreren',
+	});
 });
 
 // introduction page
 app.get('/introduction', (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 
-	res.render('introduction', { user: loggedInUser });
+	res.render('introduction', { user: loggedInUser, title: 'Introduction' });
 });
 
 // Detail page of each country
@@ -139,14 +156,20 @@ app.get('/logout', (req, res) => {
 });
 
 // route for register a user
-app.post(
-	'/registreren',
-	validateUserSignUp,
-	userValidation,
-	async (req, res) => {
+app.post('/registreren', validateUserSignUp, async (req, res) => {
+	const result = validationResult(req).array();
+	const loggedInUser = req.session.user ? req.session.user : null;
+
+	if (result.length > 0) {
+		res.render('registreren', {
+			err: result,
+			user: loggedInUser,
+			title: 'Registreren',
+		});
+	} else {
 		AddNewUserForm(req, res);
 	}
-);
+});
 
 // Lijst met de favoriete landen van een user
 app.get('/mijnlijst', async (req, res) => {
@@ -192,6 +215,7 @@ const homePage = async (req, res) => {
 	res.render('home', {
 		countries: countries,
 		user: loggedInUser,
+		title: 'Landen',
 	});
 };
 const countryDetailPage = async (req, res) => {
@@ -204,6 +228,7 @@ const countryDetailPage = async (req, res) => {
 	res.render('countryDetail', {
 		data: countryData,
 		user: loggedInUser,
+		title: req.params.country,
 	});
 };
 const profilePage = (req, res) => {
@@ -214,6 +239,7 @@ const profilePage = (req, res) => {
 	if (loggedInUser) {
 		res.render('profile', {
 			user: loggedInUser,
+			title: 'Profiel',
 		});
 	} else {
 		res.redirect('/aanmelden');
@@ -228,7 +254,11 @@ const MatchMePage = async (req, res) => {
 
 	if (loggedInUser) {
 		const user = await User.findOne({ email: loggedInUser.email });
-		res.render('match-me', { user: user, data: countries[randomInt] });
+		res.render('match-me', {
+			user: user,
+			data: countries[randomInt],
+			title: 'Match me',
+		});
 	} else {
 		res.redirect('/aanmelden');
 	}
@@ -238,7 +268,7 @@ const MyListPage = async (req, res) => {
 
 	if (loggedInUser) {
 		const user = await User.findOne({ email: loggedInUser.email });
-		res.render('mijnlijst', { user: user });
+		res.render('mijnlijst', { user: user, title: 'Mijn lijst' });
 	} else {
 		res.redirect('/aanmelden');
 	}
@@ -289,7 +319,9 @@ const addCountryToFavorites = async (req, res) => {
 	if (!loggedInUser) {
 		res.redirect('/aanmelden');
 	} else {
-		const user = await User.findOne({ email: loggedInUser.email });
+		const user = await User.findOne({
+			email: loggedInUser.email,
+		});
 		user.countries.push(form);
 		await user.save();
 	}
@@ -298,9 +330,19 @@ const RemoveCountryFromList = async (req, res) => {
 	const loggedInUser = req.session.user ? req.session.user : null;
 
 	const test = await User.findOneAndUpdate(
-		{ email: loggedInUser.email },
-		{ $pull: { countries: { alpha: req.params.id } } },
-		{ new: true }
+		{
+			email: loggedInUser.email,
+		},
+		{
+			$pull: {
+				countries: {
+					alpha: req.params.id,
+				},
+			},
+		},
+		{
+			new: true,
+		}
 	);
 
 	res.redirect('/mijnlijst');
@@ -317,7 +359,9 @@ const AddCountryFromMatchMePage = async (req, res) => {
 		alpha: req.body.alpha,
 	};
 
-	const user = await User.findOne({ email: loggedInUser.email });
+	const user = await User.findOne({
+		email: loggedInUser.email,
+	});
 	user.countries.push(form);
 	await user.save();
 

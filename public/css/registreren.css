@@ -63,7 +63,7 @@
 /* Dit zijn de invoervelden */
 input[type="text"],
 input[type="password"],
-input[type="mail"] {
+input[type="email"] {
     padding: 1em;
 }
 
