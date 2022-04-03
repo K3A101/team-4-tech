@@ -8,6 +8,12 @@
     background-color: white;
 }
 
+.register-container #registreren-link {
+    color: var(--secondary-color);
+    margin-top: 2em;
+    text-align: center;
+}
+
 .register-container .image-container {
     height: 100%;
     width: 100%;
