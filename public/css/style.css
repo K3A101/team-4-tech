@@ -71,7 +71,6 @@ header nav a {
 	line-height: 3.5em;
 	text-transform: uppercase;
 	padding: 0rem 1rem;
-
 }
 
 .toggle-button {
@@ -163,9 +162,9 @@ Bron: https: //www.youtube.com/watch?v=At4B7A4GOPg */
 	.links.active {
 		display: block;
 		position: relative;
-    z-index: 5;
-    background: black;
-    top: 3rem;
+		z-index: 5;
+		background: black;
+		top: 3rem;
 	}
 
 	.links {
@@ -264,7 +263,7 @@ h1 {
 	position: relative;
 	margin-bottom: 1em;
 	border-radius: 4px;
-	background-color: #E8F3FF;
+	background-color: #e8f3ff;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
 	cursor: pointer;
 	overflow: hidden;
@@ -361,11 +360,13 @@ input::placeholder {
 
 /*Mijnlijst*/
 #mijnlijst-container {
-	display: flex;
-	gap: 1rem;
 	margin: 0 auto;
 	max-width: 1440px;
-	padding: 30px;
+	padding: 2rem;
+}
+
+#mijnlijst-container h1 {
+	padding-bottom: 1rem;
 }
 
 #mijnlijst-column {
@@ -379,8 +380,7 @@ input::placeholder {
 	margin-bottom: 1em;
 	border-radius: 4px;
 	background-color: white;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06),
-		0 1px 2px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
 	cursor: pointer;
 	overflow: hidden;
 	padding: 1em;
@@ -646,7 +646,7 @@ input::placeholder {
 	padding: 0.5rem 2rem;
 }
 
-#bereken_section h1{
+#bereken_section h1 {
 	max-width: 75%;
 }
 
@@ -698,7 +698,6 @@ input::placeholder {
 	display: none;
 }
 
-
 /* responsive */
 
 @media (max-width: 500px) {
@@ -717,6 +716,10 @@ input::placeholder {
 	}
 
 	.register-container .volledige-naam {
+		grid-template-columns: 1fr;
+	}
+
+	body main #mijnlijst-column {
 		grid-template-columns: 1fr;
 	}
 }
@@ -744,7 +747,7 @@ input::placeholder {
 	}
 
 	.card-body,
-	#bereken_section, 
+	#bereken_section,
 	#weather-data {
 		padding: 1rem 0;
 	}
@@ -754,5 +757,15 @@ input::placeholder {
 	}
 	.register-container form {
 		padding: 5em 2em 10em 2em;
+	}
+
+	main #mijnlijst-column {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 1000px) {
+	#mijnlijst-column {
+		grid-template-columns: repeat(3, 1fr);
 	}
 }

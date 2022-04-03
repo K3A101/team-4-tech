@@ -1,17 +1,26 @@
 <section id="mijnlijst-container">
-    <div id="mijnlijst-column">
-        <% user.countries.forEach(function(item){ %>
-        <section id="mijnlijst">
-            <h2><%= item.land %></h2>
-            <p><strong>Populatie:</strong> <span><%= item.populatie %></span></p>
-            <p><strong>Regio:</strong> <span><%= item.regio %></span></p>
-            <p><strong>Hoofdstad:</strong> <span><%= item.capital %></span></p>
-            <p><strong>Taal:</strong> <span><%= item.language %></span></p>
-            <form action="/mijn-lijst/delete/<%= item.alpha %>" method="POST">
-                <button onclick="showToaster('<%= item.land %> verwijderd uit favorieten')"
-                    type="submit">Verwijder</button>
-            </form>
-        </section>
-        <% }) %>
-    </div>
+	<h1>Mijn lijst</h1>
+	<% if (user.countries.length <= 0) {%>
+	<p>U heeft nog geen landen toegevoegd aan uw favorieten</p>
+	<p>Klik <a href="/">hier</a> om landen te bekijken</p>
+	<%} %>
+	<div id="mijnlijst-column">
+		<% user.countries.forEach(function(item){ %>
+		<section id="mijnlijst">
+			<h2><%= item.land %></h2>
+			<p><strong>Populatie:</strong> <span><%= item.populatie %></span></p>
+			<p><strong>Regio:</strong> <span><%= item.regio %></span></p>
+			<p><strong>Hoofdstad:</strong> <span><%= item.capital %></span></p>
+			<p><strong>Taal:</strong> <span><%= item.language %></span></p>
+			<form action="/mijn-lijst/delete/<%= item.alpha %>" method="POST">
+				<button
+					onclick="showToaster('<%= item.land %> verwijderd uit favorieten')"
+					type="submit"
+				>
+					Verwijder
+				</button>
+			</form>
+		</section>
+		<% }) %>
+	</div>
 </section>
