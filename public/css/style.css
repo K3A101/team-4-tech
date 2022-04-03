@@ -240,6 +240,7 @@ header nav li:last-of-type a:focus {
 img {
 	max-width: 100%;
 }
+
 /******************/
 /* HAMBURGERMENU */
 /******************/
@@ -482,26 +483,66 @@ input::placeholder {
 }
 
 /*Mijnlijst*/
-#mijnlijst main {
+#mijnlijst-container {
 	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
+	gap: 1rem;
 	margin: 0 auto;
 	max-width: 1440px;
 	padding: 30px;
+}
+
+#mijnlijst-column {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1rem;
+}
+
+#mijnlijst {
 	position: relative;
-}
-
-#mijnlijst section {
+	margin-bottom: 1em;
+	border-radius: 4px;
 	background-color: white;
-	width: 300px;
-	padding: 10px;
-	margin: 10px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06),
+		0 1px 2px rgba(0, 0, 0, 0.12);
+	cursor: pointer;
+	overflow: hidden;
+	padding: 1em;
 }
 
-#mijnlijst h1 {
-	margin-left: 40px;
-	margin-top: 40px;
+#mijnlijst h2 {
+	margin-bottom: 0.3em;
+	font-size: 1.8em;
+	border-bottom: 4px solid var(--secondary-color);
+	padding: 0.5em;
+}
+
+#mijnlijst p {
+	padding: 0.5em;
+}
+
+#mijnlijst span {
+	margin-left: 1em;
+}
+
+#mijnlijst button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-color: var(--secondary-color);
+	color: var(--background-color);
+	font-weight: bold;
+	border: 0;
+	padding: 0.7em;
+	transition: 0.3s;
+}
+
+#mijnlijst button:active {
+	transform: scale(1.01);
+}
+
+#mijnlijst button:hover {
+	background-color: var(--highlight-color);
+	color: white;
 }
 
 /*countryDetail*/
@@ -527,6 +568,7 @@ input::placeholder {
 .left_box input[type='number']:focus {
 	outline-color: #47a638;
 }
+
 .right_box input[type='text'] {
 	width: 15em;
 	padding: 12px 20px;
@@ -769,4 +811,3 @@ input::placeholder {
 .hidden {
 	display: none;
 }
-
