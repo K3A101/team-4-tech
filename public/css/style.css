@@ -396,7 +396,7 @@ h1 {
 	position: relative;
 	margin-bottom: 1em;
 	border-radius: 4px;
-	background-color: white;
+	background-color: #E8F3FF;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
 	cursor: pointer;
 	overflow: hidden;
@@ -708,8 +708,13 @@ input::placeholder {
 
 .flag-image {
 	object-fit: contain;
-	width: 100%;
+	width: 90%;
 	height: 100%;
+	margin: auto;
+}
+
+.details-flag {
+	max-width: 90%;
 }
 
 .land-information {
@@ -730,6 +735,10 @@ input::placeholder {
 #weather-data,
 #bereken_section {
 	padding: 0.5rem 2rem;
+}
+
+#bereken_section h1{
+	max-width: 75%;
 }
 
 .content-title {
