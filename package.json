@@ -9,7 +9,11 @@
     "compress": "{{ run command to compress files }}",
     "postcompress": "{{ executes AFTER `compress` script }}",
     "start": "node app.js",
-    "watch": "nodemon app.js"
+    "watch": "nodemon app.js",
+    "gulp": "gulp bundleJs",   
+    "autoJs": "gulp automatischJs",
+    "bundleCss": "gulp bundleCss",
+    "autoCss": "gulp automatisch"
   },
   "author": "Michael Wilhelm",
   "license": "MIT",

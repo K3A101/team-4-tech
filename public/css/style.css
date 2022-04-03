@@ -768,12 +768,16 @@ input::placeholder {
 	position: fixed;
 	right: 1rem;
 	bottom: 1rem;
-	background: #ffa800;
-	padding: 0.4rem 1.5rem;
-	border-radius: 0.6rem;
 	max-width: 20rem;
 	color: white;
 	font-weight: 700;
+}
+#toaster p {
+	padding: 0.4rem 1.5rem;
+	margin: 1rem 0;
+	background: #d95209;
+	border-radius: 0.6rem;
+	text-decoration: dashed;
 }
 
 .hidden {
